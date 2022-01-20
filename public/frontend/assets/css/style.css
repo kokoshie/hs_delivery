@@ -1,0 +1,84 @@
+.btn-grad {background-image: linear-gradient(to right, #4568DC 0%, #B06AB3  51%, #4568DC  100%)}
+    .btn-grad {
+       margin: 10px;
+       padding: 15px 45px;
+       text-align: center;
+       text-transform: uppercase;
+       transition: 0.5s;
+       background-size: 200% auto;
+       color: white;
+       box-shadow: 0 0 20px #eee;
+       border-radius: 10px;
+       display: block;
+       width: 50%;
+     }
+
+     .btn-grad:hover {
+       background-position: right center; /* change the direction of the change here */
+       color: #fff;
+       text-decoration: none;
+     }
+
+     .outline {
+        border-color: #7D33FF;
+        color:#7D33FF;
+      }
+
+      .outline:hover {
+        background-color: #7D33FF;
+        color: white;
+      }
+
+
+      .p_card{
+          font-weight: bold;
+          font-size: 15px;
+          color: #eeee39;
+      }
+
+      .foot{
+        color:orangered;
+      }
+
+      .card_color {background-image: linear-gradient(to right, #4568DC 0%, #B06AB3  51%, #4568DC  100%)}
+
+
+
+
+      /* .container {
+        padding: 2rem 0rem;
+      }
+
+      @media (min-width: 576px) {
+        .modal-dialog {
+          max-width: 400px;
+        }
+        .modal-dialog .modal-content {
+          padding: 1rem;
+        }
+      }
+      .modal-header .close {
+        margin-top: -1.5rem;
+      }
+
+      .form-title {
+        margin: -2rem 0rem 2rem;
+      }
+
+      .btn-round {
+        border-radius: 3rem;
+      }
+
+      .delimiter {
+        padding: 1rem;
+      }
+
+      .social-buttons .btn {
+        margin: 0 0.5rem 1rem;
+      }
+
+      .signup-section {
+        padding: 0.3rem 0rem;
+      } */
+
+
