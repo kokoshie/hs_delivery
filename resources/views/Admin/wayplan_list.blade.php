@@ -1,0 +1,406 @@
+@extends('master')
+@section('title', 'Dashboard')
+@section('content')
+<div class="row">
+  <input type="hidden" id="searchtype">
+  <input type="hidden" id="searchdatetype">
+  <form action="{{ route('way_import') }}" method="POST" enctype="multipart/form-data" id="excelway">
+    @csrf
+        <input type="file" id="excelwayfile" name="file" class="form-control input-sm mr-8 bg-info">
+
+
+    </form>
+    <div class="col-md-3 mt-3" id="search_type">
+        <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" id="rout" onchange="select_type(this.value)">
+            <option selected>Choose Search Type</option>
+            <option value="1">Route</option>
+            <option value="2">Phone Number</option>
+            <option value="3">Token</option>
+            <option value="4">Start Date</option>
+        </select>
+    </div>
+    <div class="col-md-4" id="type_result" style="margin-top:17px;">
+
+    </div>
+    <div class="col-md-5" style="padding-top:17px;padding-right:20px;">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-primary" style="margin-top:5px;margin-left:px" onclick="searching()">Search</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-dark" style="margin-top:5px;" onclick="excel_import()">Import</button>
+            </div>
+        </div>
+
+
+    {{-- Excel Import Begin --}}
+
+
+    {{-- End Excel Import --}}
+  </div>
+</div>
+
+
+<div id="rou" class="mt-4">
+
+</div>
+
+<div class="container mt-5">
+<!-- <div class="offset-md-11">
+    <button class="btn btn-info" onclick="searching()"><i class=" fas fa-search mr-2" style="color:#fff"></i>Search</button>
+  </div> -->
+    <table class="table table-striped">
+      <thead class="bg-info text-white">
+        <tr>
+          <th>No</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Location</th>
+          <th>Pak Qty</th>
+          <th>Contact Number</th>
+          <th>Total Charges</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody id="search_result">
+        <?php $i=1; ?>
+        @foreach($wayplan as $way)
+        @if($way->reject_status != 1)
+        <tr>
+            <td>{{$i++}}.</td>
+            <td><i class="far fa-user mr-2" style="size:7px"></i>{{$way->customer_name}}</td>
+            @if($way->way_status == 0)
+            <td><span class="badge badge-light border border-danger mt-1 text-danger">Pending</span></td>
+            @else
+            <td><span class="badge badge-light border border-success mt-1 text-success">Done</span></td>
+            @endif
+
+
+
+            @if($way->receive_status == 0)
+            @foreach($location as $locat)
+            @if($locat->id == $way->receive_point)
+            <td>{{$locat->name}}</td>
+            @endif
+            @endforeach
+            @elseif($way->receive_status == 1 && $way->myawady_status != 2 && $way->way_status != 1)
+            @foreach($location as $locat)
+            @if($locat->id == $way->receive_point)
+            <td>{{$locat->name}}</td>
+            @endif
+            @endforeach
+            @elseif($way->myawady_status == 2 && $way->dropoff_status != 2 && $way->way_status != 1)
+            <td>MyaWady</td>
+            @elseif($way->dropoff_status == 2 && $way->customer_status != 2 && $way->way_status != 1)
+            <td>DropOff</td>
+            @elseif($way->way_status == 1)
+            <td>{{$way->customer_address}}</td>
+            @endif
+
+
+            <td>&nbsp;&nbsp;&nbsp;{{$way->parcel_quantity}}</td>
+            <td>{{$way->customer_phone}}</td>
+            <td>{{$way->total_charges}}</td>
+            <!-- <td><button href="{{route('way_change_status',$way->id)}}" type="button" class="btn btn-sm btn-danger"><i class="fas fa-ellipsis-h"></i>hello</button></td> -->
+            <td><a href="{{route('way_change_status',$way->id)}}" class="btn btn-sm btn-primary">Change Status</a>
+            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#reject_modal{{$way->id}}">Reject</button>
+          </td>
+          </tr>
+          <!-- Reject Modal -->
+          <div class="modal fade" id="reject_modal{{$way->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Reject WayPlan</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="{{route('reject_way')}}" method="post">
+                  @csrf
+                  <input type="hidden" name="wayID" value="{{$way->id}}">
+                <div class="modal-body">
+                  <div class="row">
+                      <div class="col-md-3 mr-2">
+                          <h5 style="color:rgb(34, 190, 241)" class="pl-4 ml-3 pt-2">Date</h5>
+                      </div>
+                      <div class="col-md-6">
+                      <input type="date" name="reject_date" id="receive_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="">
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3">
+                            <h5 style="color:rgb(34, 190, 241);margin-top:20px;" class="pl-4 pt-2">Remark</h5>
+                        </div>
+                        <div class="col-md-6" style="margin-left:8px;">
+                        <textarea name="reject_remark" id="" cols="45" rows="3" class="border border-outline border-primary" style="border-radius: 7px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger">Reject</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Reject Modal -->
+          @endif
+          @endforeach
+      </tbody>
+    </table>
+  </div>
+
+@endsection
+
+@section('js')
+
+<script>
+ $(document).ready(function(){
+    // $('#show_route').hide();
+    // $('#show_phone').hide();
+    // $('#show_date').hide();
+    // $('#show_token').hide();
+    $('#excelwayfile').hide();
+  })
+  function excel_import()
+  {
+      $('#excelwayfile').click();
+  }
+  $('#excelwayfile').change(function(){
+    $('#excelway').submit();
+  });
+function routes(val){
+    alert(val);
+    html = '';
+    if(val == 1){
+        html+=`<h5 style="color:black;" class="ml-3">BKK-YGN Route</h5>
+               <hr style="width:20%;text-align:left;margin-left:0">
+               `;
+    }
+    else if(val == 2){
+        html+=`<h5 style="color:black;" class="ml-3">BKK-MDY Route</h5>
+                <hr style="width:20%;text-align:left;margin-left:0">
+               `;
+    }
+    else if(val == 3){
+        html+=`<h5 style="color:black;" class="ml-3">MAESOT-YGN Route</h5>
+                <hr style="width:20%;text-align:left;margin-left:0">
+               `;
+    }
+    else if(val == 4){
+        html+=`<h5 style="color:black;" class="ml-3">MAESOT-MDY Route</h5>
+                <hr style="width:20%;text-align:left;margin-left:0">
+               `;
+    }
+
+    $('#rou').html(html);
+    $('#searchtype').val(0);
+
+}
+function select_type(value)
+{
+  var htmltype = "";
+  if(value == 1)
+  {
+     htmltype +=`
+     <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" id="rout" onchange="routes(this.value)">
+
+      <option selected>Routes</option>
+      <option value="1">BKK-YGN Route</option>
+      <option value="2">BKK-MDY Route</option>
+      <option value="3">MAESOT-YGN Route</option>
+      <option value="4">MAESOT-MDY Route</option>
+
+  </select>
+     `;
+  }
+  else if(value == 2)
+  {
+    htmltype +=`
+
+      <input type="search" id="search_phone" class="form-control rounded border border-primary" placeholder="Search With Phone No" aria-label="Search" aria-describedby="search-addon" onkeyup="searchwithph()"/>
+
+    `;
+  }
+  else if(value == 3)
+  {
+    htmltype +=`
+    <input type="search" id="search_token" class="form-control rounded border border-primary" placeholder="Search With Token" aria-label="Search" aria-describedby="search-addon" onkeyup="intoken()"/>
+    `;
+  }
+  else if(value == 4)
+  {
+    htmltype +=`
+    <div class="row">
+    <div class="col-md-6">
+    <input type="date" id="search_date" class="form-control rounded border border-primary" placeholder="Search With Date" aria-label="Search" aria-describedby="search-addon" onchange="indate()"/>
+    </div>
+    <div class="col-md-6">
+    <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" id="date_type" onchange="dateType(this.value)">
+
+      <option selected>Choose Date Type</option>
+      <option value="1">Receive point</option>
+      <option value="2">Register</option>
+      <option value="3">MyaWady point</option>
+      <option value="4">DropOff point</option>
+
+  </select>
+  </div>
+  </div>
+    `;
+  }
+  $('#type_result').html(htmltype);
+}
+function dateType(value)
+{
+  $('#searchdatetype').val(value);
+}
+function searchwithph()
+{
+  $('#searchtype').val(1);
+  var phno = $('#search_phone').val();
+  // console.log(phno);
+  $.ajax({
+           type:'POST',
+           url:'/search_phone_ajax',
+           dataType:'json',
+           data:{
+                "_token": "{{ csrf_token() }}",
+                "phone":phno,
+
+            },
+
+           success:function(data){
+             var htmlphone = "";
+              $.each(data,function(i,v){
+                  htmlphone +=`
+
+                  ${v.customer_phone}</br>
+
+                  `;
+              });
+              $('#phone_suggest').html(htmlphone);
+
+           }
+          });
+
+}
+function intoken()
+{
+  $('#searchtype').val(2);
+}
+function indate()
+{
+  $('#searchtype').val(3);
+}
+function searching()
+{
+  var date_type_in = $('#searchdatetype').val();
+  var insearch = $('#searchtype').val();
+  var phone = $('#search_phone').val();
+  var token = $('#search_token').val();
+  var date = $('#search_date').val();
+  // alert(date);
+  if(insearch == 1)
+  {
+    var key = phone;
+    var type = 1;
+    var date_type = 0;
+  }
+  else if(insearch == 2)
+  {
+    var key = token;
+    var type = 2;
+    var date_type = 0;
+  }
+  else if(insearch == 3)
+  {
+    var key = date;
+    var type = 3;
+    var date_type = date_type_in;
+  }
+
+  alert(key);
+  $.ajax({
+           type:'POST',
+           url:'/searching_ajax',
+           dataType:'json',
+           data:{
+                "_token": "{{ csrf_token() }}",
+                "search_key":key,
+                "type" : type,
+                "date_type" : date_type
+            },
+
+           success:function(data){
+
+              var htmlresult = "";
+              $.each(data,function(i,v){
+                var url = "{{url('/way_change_status')}}/"+v.id;
+                alert(v.customer_name);
+                htmlresult +=`
+                <tr>
+            <td>${i+1}.</td>
+            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>`;
+            if(v.way_status == 0)
+            {
+            htmlresult +=`
+            <td><span class="badge badge-light border border-danger mt-1 text-danger">Pending</span></td>`;
+            }
+            else
+            {
+            htmlresult +=`
+            <td><span class="badge badge-light border border-success mt-1 text-success">Done</span></td>`;
+            }
+
+            if(v.receive_status == 0)
+            {
+              htmlresult +=`
+              <td>${v.receivelocation.name}</td>
+              `;
+            }
+            else if(v.receive_status == 1 && v.myawady_status != 2 && v.way_status != 1)
+            {
+            htmlresult +=`
+            <td>${v.receivelocation.name}</td>
+            `;
+            }
+            else if(v.myawady_status == 2 && v.dropoff_status != 2 && v.way_status != 1)
+            {
+              htmlresult +=`
+              <td>MyaWady</td>
+              `;
+            }
+            else if(v.dropoff_status == 2 && v.customer_status != 2 && v.way_status != 1)
+            {
+              htmlresult +=`
+              <td>${v.dropofflocation.name}</td>
+              `;
+            }
+            else if(v.way_status == 1)
+            {
+              htmlresult +=`
+              <td>${v.customer_address}</td>
+              `;
+            }
+            htmlresult +=`
+            <td>&nbsp;&nbsp;&nbsp;${v.parcel_quantity}</td>
+            <td>${v.customer_phone}</td>
+            <td>${v.total_charges}</td>
+
+            <td><a href="${url}" class="btn btn-sm btn-primary">Change Status</a>
+            <a href="" class="btn btn-sm btn-danger">Reject</a>
+            </td>
+            </tr>
+            `;
+
+              });
+              $('#search_result').html(htmlresult);
+           }
+          });
+}
+</script>
+
+@endsection
