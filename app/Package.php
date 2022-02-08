@@ -15,3 +15,4 @@ class Package extends Model
         'to_city_name',
     ];
 }
+

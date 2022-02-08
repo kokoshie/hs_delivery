@@ -1,6 +1,6 @@
 
 
-@extends('../frontend/master')
+@extends('../frontend/track')
 @section('title', 'Home')
 @section('content')
 
@@ -11,14 +11,8 @@
     <section class="pb-6" id="about">
  {{-- <span>#4568DC</span> --}}
       <div class="container">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
         <div class="row flex-center">
-
-          <div class="col-lg-6 col-md-5 order-md-1">
-               <img class="img-fluid" src="{{asset('frontend/assets/img/pic1.jpg')}}" alt=""/> 
-              <!-- <div id="carouselExampleIndicators" class="carousel slide col-lg-6 col-md-5 order-md-1" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide col-lg-6 col-md-5 order-md-1" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img class="d-block w-100 img-fluid" src="{{asset('frontend/assets/img/pic1.jpg')}}" alt="First slide">
@@ -30,44 +24,26 @@
                     <img class="d-block w-100 img-fluid" src="{{asset('frontend/assets/img/pic1.jpg')}}" alt="Third slide">
                   </div>
                 </div>
-              </div> -->
-          </div> 
+              </div>
           <div class="col-md-7 col-lg-6 mt-5 text-md-start">
-            
             <h5 class="fw-medium"><span style="background-color:#ae17db;color:#fff; " class="py-1 mb-2"> &nbsp;&nbsp; မိတ်ဆက် &nbsp;&nbsp;</span></h5>
-
             <p class="mt-2 mb-4" style="font-style:italic;color:black;text-indent :5em;">
-
-
 
 HS Cargo သည် Hlwan Shwe La Min   Trading and Logistics  Company ၏ လုပ်ငန်းခွဲ တခုဖြစ်ပါသည် …
 
 လွှမ်းရွှေလမင်း ကုမ္ပဏီ ဟာ  နိုင်ငံတကာ ကုန်ပစ္စည်းများ အား ယိုးဒယား နိုင်ငံ ဘန်ကောက် Laem Chabang ဆိပ်ကမ်း မှ  ပေ ၄၀  ကွန်တိန်နာများ ပစ္စည်း များ အား မြန်မာပြည် သို့ Transit  Custom Clearances ပြုလုပ်ပေးခြင်း သယ်ယူပို့ဆောင်ခြင်း ဝန်ဆောင် မှု ပေးနေသော ကုမ္ပဏီဖြစ်ပါသည် ….
 
 Trading အနေနှင့် ယိုးဒယား နိုင်ငံထုတ် ကြွေပြား .. ကျောက်ပြား ( Smart board ) များ အား တင်သွင်း ခြင်း ရောင်းချခြင်း ၂၂ ဘီး တွဲကားများဖြင့် မြန်မာပြည် အနှံ့ ပို့ဆောင်ပေးခြင်း … ဂျပန်နိုင်ငံ မှ လုပ်ငန်းသုံးယဉ် အပိုပစ္စည်းများ တင်သွင်းရောင်းချခြင်း လုပ်ငန်းများ လုပ်ကိုင်နေသော ကုမ္ပဏီ ဖြစ်ပါသည် .
-
-
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
 HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်ထည်ဖော် ရခြင်းသည် ကုမ္ပဏီသည် Cargo လုပ်ငန်း အတွက် ဂိုထောင် များ ယိုးဒယား နိုင်ငံ နှင့် မြန်မာနိုင်ငံ တွင် ကုန်ကား များ အခြေခံ အဆောက်အအုံ ကောင်းများ ရှိပီး ဖြစ်သောကြောင့် မိတ်ဆွေများ နှင့် ကုန်သည် များ အား  အဆင်ပြေလွယ်ကူ စွာ ကုန်ပစ္စည်း သယ်ယူပို့ဆောင် ရောင်းချ နိုင်စေရန် - ယိုးဒယား နိုင်ံငံတွင်းရှိ မြန်မာနိုင်ငံသားများ အား အလုပ်ကိုင် များပိုမို ပေးနိုင်ရန် …. အလုပ်ကိုင် အခွင့်လမ်း များ ပိုမိုရရှိရန် ရည်ရွယ်၍ ထပ်မံ လုပ်ကိုင်ရခြင်းဖြစ်ပါသည် …
 
 မိတ်ဟောင်း မိတ်သစ်များအား ဖိတ်ခေါ်ပြီး ကျွန်တော် တို့ နှင့် လက်တွဲ၍ မိတ်ဆွေများ အကျိုးမြတ် ဖြစ်ထွန်းကြပါစေကြောင်း …..
 
 လွှမ်းရွှေလမင်း ကုမ္ပဏီ နှင့် HS cargo မိသားစု တို့မှ ဆုမွန်ကောင်း တောင်းအပ်ပါသည် ခင်ဗျာ …… 🙏🏻🙏🏻
 
-
-
-
             </p>
             {{-- <a class="btn-grad hover" href="#">Get Started </a> --}}
-                  </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-                    <img class="" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt="Second slide" width="1108" height="538">
-           </div>
 
           </div>
         </div>

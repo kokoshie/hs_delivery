@@ -38,6 +38,7 @@ class LoginController extends Controller
 				return redirect()->route('booking_list');
 			}
 
+
 		} else {
 
 			return view('Login.login');
@@ -92,6 +93,15 @@ class LoginController extends Controller
 				alert()->success('Successfully Login!')->autoclose(2000);
 
 				return redirect()->route('admin_dashboard');   //doctor.dashboard
+
+			}
+            elseif ($request->session()->get('user')->hasRole('Manager'))
+			{
+				return redirect()->route('manager_dashboard');
+			}
+            elseif ($request->session()->get('user')->hasRole('Operator'))
+			{
+				return redirect()->route('wayplan_list');
 
 			}
 			elseif ($user->hasRole('Employee') || $user->hasRole('EmployeeC'))

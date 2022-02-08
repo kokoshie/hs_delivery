@@ -9,7 +9,7 @@
     <div class="container mt-2">
         <form action="{{route('store_package')}}" method="POST">
             @csrf
-            
+
             <div class="row mt-2">
                 <div class="col-md-6">
                     <div class="row">
@@ -32,7 +32,9 @@
                             <h5 style="color:rgb(34, 190, 241)" class="p-4 float-right">From City</h5>
                         </div>
                         <div class="col-md-7">
+
                         <select name="from_city"  id="wgtmsr" style="border-radius: 7px;color:rgb(41, 87, 236)" class="border border-outline border-primary from">
+
                          @foreach ($location as $loc)
                             <option value="{{$loc->id}}" >{{$loc->name}}</option>
                          @endforeach
@@ -47,6 +49,7 @@
                         </div>
                         <div class="col-md-7">
                         <select name="to_city"  id="wgtmsr" style="border-radius: 7px;color:rgb(41, 87, 236)" class="border border-outline border-primary to">
+
                          @foreach ($location as $loc)
                             <option value="{{$loc->id}}">{{$loc->name}}</option>
                          @endforeach
@@ -57,10 +60,12 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+
                    
                 </div>
                 <div class="col-md-2 float-left">
                    
+
                 </div>
             </div>
             <div class="row offset-md-5">
@@ -106,15 +111,50 @@
                 </div>
                 <div class="col-md-2">
                 <select name="currency[]"  id="wgtmsr" style="border-radius: 7px;color:rgb(41, 87, 236)" class="border border-outline border-primary">
+
                         <option value="1" selected>MMK</option>
                         <option value="2">BAHT</option>
                         <option value="3">USD</option>
                     </select>
                 </div>
-                <!-- <div class="col-md-1">
-                    <button type="button" class="btn btn-warning" style="margin-top:20px" onclick="add_new()"><i class="fas fa-plus"></i></button>
-                </div> -->
+
             </div>
+            <!-- <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h5 style="color:rgb(34, 190, 241)" class="p-4 float-right">Range: Min</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="min" class="border border-outline border-primary" style="border-radius: 7px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h5 style="color:rgb(34, 190, 241)" class="p-4 float-right"> Max</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="row">
+                            <div class="col-md-10">
+                            <input type="text" name="max" class="border border-outline border-primary" style="border-radius: 7px;">
+                            </div>
+                            <div class="col-md-2 mt-3">
+                            <button class="btn btn-warning"><i class="whitecolor fas fa-plus" style="border-radius: 7px;"></i></button>
+                            </div>
+                         </div>
+                        </div>
+                        {{-- <div class="col-md-1 mt-3">
+
+                        </div> --}}
+                    </div>
+                    {{-- <div class="col-md-2">
+                        <i class="fas fa-plus mr-2" style="border-radius: 7px;"></i>
+                    </div> --}}
+                </div>
+
+            </div> -->
 
             <div class="row offset-5 mt-3">
                  <button type="submit" class="btn btn-lg btn-primary">Yes</button></a>
@@ -124,7 +164,7 @@
 @endsection
 @section('js')
 <script>
-    
+
     var count = 1;
     function add_new()
     {
@@ -174,7 +214,7 @@
                         <option value="3">USD</option>
                     </select>
                 </div>
-                
+
         `;
         $('#new_info').append(htmlnew);
     }
@@ -183,7 +223,7 @@
        var pre = count -1;
         var count = $('#check'+count).val();
         var min = $('#min'+count).val();
-        
+
         var premax = $('#max'+pre).val();
         var max  = $('#min'+max).val();
         // alert(max+"-=-="+min);
@@ -198,7 +238,7 @@
                     title: "Error Message",
                     text: "Min Rage is not less than Previous Max Range ="+premax,
                     icon: "error",
-                    
+
                 });
                 $('#min'+count).val("");
         }
@@ -209,7 +249,7 @@
                     title: "Error Message",
                     text: "Min Rage is not less than Previous Max Range ="+premax,
                     icon: "error",
-                    
+
                 });
                 $('#max'+count).val("");
         }
@@ -230,7 +270,7 @@
         //             title: "Error Message",
         //             text: "Min Rage is not less than Previous Max Range ="+max,
         //             icon: "error",
-                    
+
         //         });
         //         $('#max'+count).val("");
         // }

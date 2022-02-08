@@ -26,6 +26,7 @@
                   </tr>
                 </thead>
                 <tbody>
+
                 <?php $i=1; ?>
                 @foreach($charges_list as $list)
                 <tr>
@@ -36,6 +37,7 @@
                     <td class="text-center"><a href="{{route('show_update_charges',$list->id)}}" class="btn btn-warning"><i class="far fa-edit mr-2"></i>Update</a></td>
                 </tr>
                 @endforeach
+
                 </tbody>
             </table>
         </div>

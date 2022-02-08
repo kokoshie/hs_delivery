@@ -25,6 +25,7 @@ class WayPlanSchedule extends Model
         'total_charges',
         'receive_status',
         'dropoff_status',
+
         'rider_id',
         'customer_address',
         'customer_status',
@@ -47,4 +48,5 @@ class WayPlanSchedule extends Model
             public function dropofflocation() {
                 return $this->belongsTo('App\Location','dropoff_point');
             }
+
 }

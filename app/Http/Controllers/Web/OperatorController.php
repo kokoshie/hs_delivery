@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\PackageKg_Price;
+use App\Role;
 use App\WayPlanSchedule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,116 +68,163 @@ class OperatorController extends Controller
 	const MEETING_TYPE_RECURRING = 3;
 	const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
-	protected function AdminDashboard(Request $request)
-	{
+	// protected function AdminDashboard(Request $request)
+	// {
 
-		$now = new DateTime('Asia/Yangon');
+	// 	$now = new DateTime('Asia/Yangon');
 
-		$toady_date = $now->format('Y-m-d');
+	// 	$toady_date = $now->format('Y-m-d');
 
-		$department_lists = Department::all();
+	// 	$department_lists = Department::all();
 
-		$user = $request->session()->get('user');
-		if(session()->get('user')->isOwner(1) || session()->get('user')->hasRole('EmployeeC')){
-			$bookings = Appointment::where('date', $toady_date)->get();
-		}
-		elseif(session()->get('user')->isOwner(0) && session()->get('user')->hasRole('DoctorC')){
-			$doctor = Doctor::where('user_id',$user->id)->first();
-			$bookings = Appointment::where('date', $toady_date)->where('doctor_id',$doctor->id)->get();
-		}
+	// 	$user = $request->session()->get('user');
+	// 	if(session()->get('user')->isOwner(1) || session()->get('user')->hasRole('EmployeeC')){
+	// 		$bookings = Appointment::where('date', $toady_date)->get();
+	// 	}
+	// 	elseif(session()->get('user')->isOwner(0) && session()->get('user')->hasRole('DoctorC')){
+	// 		$doctor = Doctor::where('user_id',$user->id)->first();
+	// 		$bookings = Appointment::where('date', $toady_date)->where('doctor_id',$doctor->id)->get();
+	// 	}
 
-		$announcements = Announcement::all();
+	// 	$announcements = Announcement::all();
 
-		$advertisements = Advertisement::all();
+	// 	$advertisements = Advertisement::all();
 
-		$count_booking = count($bookings);
+	// 	$count_booking = count($bookings);
 
-		$doctors = Doctor::all();
+	// 	$doctors = Doctor::all();
 
-		$patients = Patient::all();
+	// 	$patients = Patient::all();
 
-		$count_doc = count($doctors);
+	// 	$count_doc = count($doctors);
 
-		$count_patient = count($patients);
+	// 	$count_patient = count($patients);
 
-		$count_dept = count($department_lists);
+	// 	$count_dept = count($department_lists);
 
-		if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
-            $voucher_lists =Voucher::where('type', 1)->where('clinicvoucher_status',1)->orderBy('id','desc')->get();
+	// 	if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
+    //         $voucher_lists =Voucher::where('type', 1)->where('clinicvoucher_status',1)->orderBy('id','desc')->get();
 
-        }
-        else{
-            $voucher_lists =Voucher::where('type', 1)->orderBy('id','desc')->get();
+    //     }
+    //     else{
+    //         $voucher_lists =Voucher::where('type', 1)->orderBy('id','desc')->get();
 
-        }
+    //     }
 
-		$total_sales  = 0;
+	// 	$total_sales  = 0;
 
-        foreach ($voucher_lists as $voucher_list){
+    //     foreach ($voucher_lists as $voucher_list){
 
-            $total_sales += $voucher_list->total_price;
+    //         $total_sales += $voucher_list->total_price;
 
-        }
-        $date = new DateTime('Asia/Yangon');
+    //     }
+    //     $date = new DateTime('Asia/Yangon');
 
-        $current_date = strtotime($date->format('Y-m-d'));
+    //     $current_date = strtotime($date->format('Y-m-d'));
 
-        $weekly = date('Y-m-d', strtotime('-1week', $current_date));
-        // $to = date('Y-m-d', strtotime('+1day', $current_date));
-        $to = $date->format('Y-m-d');
+    //     $weekly = date('Y-m-d', strtotime('-1week', $current_date));
+    //     // $to = date('Y-m-d', strtotime('+1day', $current_date));
+    //     $to = $date->format('Y-m-d');
 
 
-        if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
+    //     if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
 
-            $weekly_data = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereBetween('voucher_date',[$weekly,$to])->get();
+    //         $weekly_data = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereBetween('voucher_date',[$weekly,$to])->get();
 
-        }
-        else{
-            $weekly_data = Voucher::where('type', 1)->whereBetween('voucher_date', [$weekly,$to])->get();
+    //     }
+    //     else{
+    //         $weekly_data = Voucher::where('type', 1)->whereBetween('voucher_date', [$weekly,$to])->get();
 
-        }
-        $weekly_sales = 0;
+    //     }
+    //     $weekly_sales = 0;
 
-        foreach($weekly_data as $weekly){
+    //     foreach($weekly_data as $weekly){
 
-            $weekly_sales += $weekly->total_price;
-        }
+    //         $weekly_sales += $weekly->total_price;
+    //     }
 
-        $current_month = $date->format('m');
-        $current_month_year = $date->format('Y');
-        $today_date = $date->format('Y-m-d');
-        if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
-            $daily = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereDate('created_at', $today_date)->get();
-        }
-        else{
-            $daily = Voucher::where('type', 1)->where('created_at', $today_date)->get();
+    //     $current_month = $date->format('m');
+    //     $current_month_year = $date->format('Y');
+    //     $today_date = $date->format('Y-m-d');
+    //     if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
+    //         $daily = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereDate('created_at', $today_date)->get();
+    //     }
+    //     else{
+    //         $daily = Voucher::where('type', 1)->where('created_at', $today_date)->get();
 
-        }
+    //     }
 
-        $daily_sales = 0;
+    //     $daily_sales = 0;
 
-        foreach($daily as $day){
+    //     foreach($daily as $day){
 
-            $daily_sales += $day->total_price;
-        }
-        if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
+    //         $daily_sales += $day->total_price;
+    //     }
+    //     if(session()->get('user')->hasRole('EmployeeC') || session()->get('user')->hasRole('DoctorC')){
 
-            $monthly = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereMonth('created_at',$current_month)->whereYear('created_at',$current_month_year)->get();
+    //         $monthly = Voucher::where('type', 1)->where('clinicvoucher_status',1)->whereMonth('created_at',$current_month)->whereYear('created_at',$current_month_year)->get();
 
-        }
-        else{
-            $monthly = Voucher::where('type', 1)->whereMonth('created_at',$current_month)->get();
+    //     }
+    //     else{
+    //         $monthly = Voucher::where('type', 1)->whereMonth('created_at',$current_month)->get();
 
-        }
-        $monthly_sales = 0;
+    //     }
+    //     $monthly_sales = 0;
 
-        foreach ($monthly as $month){
+    //     foreach ($monthly as $month){
 
-            $monthly_sales += $month->total_price;
-        }
+    //         $monthly_sales += $month->total_price;
+    //     }
 
-		return view('Admin.dashboard', compact('department_lists', 'count_doc', 'count_patient', 'count_dept', 'doctors', 'count_booking', 'announcements', 'advertisements','total_sales','daily_sales','monthly_sales','weekly_sales'));
+	// 	return view('Admin.dashboard', compact('department_lists', 'count_doc', 'count_patient', 'count_dept', 'doctors', 'count_booking', 'announcements', 'advertisements','total_sales','daily_sales','monthly_sales','weekly_sales'));
+	// }
+
+	protected function employee_list(Request $request){
+        $roles = Role::all();
+        $users = User::all();
+        // dd($users);
+		return view('Admin.employee_list',compact('roles','users'));
 	}
+
+    protected function store_employee(Request $request){
+
+        // dd($request->all());
+        $name = $request->name;
+        $email = $request->email;
+        $pass = Hash::make($request->password);
+        $phone = $request->phone;
+
+       $user =  User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $pass,
+            'phone' => $phone
+        ]);
+
+        $user->assignRole($request->role);
+        alert()->success('Sucessfully Employee Created!!');
+
+			return redirect()->back();
+
+	}
+
+    protected function delete_employee($id){
+
+            // dd($id);
+            User::find($id)->delete();
+        return redirect()->back();
+    }
+
+    protected function update_employee($id){
+
+       dd($id);
+}
+
+
+    protected function manager_dashboard(Request $request){
+		$waylist = WayPlanSchedule::all();
+        return view('manager_dashboard',compact('waylist'));
+    }
 
     protected function township(Request $request){
 		$charges_list = Package::all();
@@ -184,12 +232,141 @@ class OperatorController extends Controller
     }
 
     protected function schedule(Request $request){
+
 		// $wayplanid = WayPlanSchedule::create([
 		// 	'parcel_quantity' => 0
 		// ]);
+
 		$location = Location::all();
         return view('Admin.schedule',compact('location'));
     }
+	protected function change_barchart_week(Request $request)
+	{
+		$week = $request->receive_week;
+		$weekStartDate = Carbon::parse($request->receive_week)->startOfWeek()->format('Y-m-d');
+		$weekEndDate = Carbon::parse($request->receive_week)->endOfWeek()->format('Y-m-d');
+
+		$two_day = Carbon::parse($weekStartDate)->addDays(1)->format('Y-m-d');
+		$three_day = Carbon::parse($two_day)->addDays(1)->format('Y-m-d');
+		$four_day = Carbon::parse($three_day)->addDays(1)->format('Y-m-d');
+		$five_day = Carbon::parse($four_day)->addDays(1)->format('Y-m-d');
+		$six_day = Carbon::parse($five_day)->addDays(1)->format('Y-m-d');
+		$seven_day = Carbon::parse($six_day)->addDays(1)->format('Y-m-d');
+dd($weekStartDate."---".$two_day."---".$three_day."---".$four_day."---".$five_day);
+		// dd($weekStartDate."---".$weekEndDate);
+
+	}
+	protected function change_barchart(Request $request)
+	{
+		
+		$date =$request->receive_month;
+		
+        
+        $firstdate = Carbon::parse($date)->firstOfMonth()->format('Y-m-d');
+		
+        $first_week = Carbon::parse($firstdate)->addDays(6)->format('Y-m-d');
+		$second_week = Carbon::parse($first_week)->addDays(6)->format('Y-m-d');
+		$third_week = Carbon::parse($second_week)->addDays(6)->format('Y-m-d');
+		$last_week = Carbon::parse($third_week)->endOfMonth()->format('Y-m-d');
+		// dd($last_week);
+		$first_week_status = WayPlanSchedule::whereBetween('receive_date', [$firstdate, $first_week])->where('receive_status',1)->get();
+		$second_week_status = WayPlanSchedule::whereBetween('receive_date', [$first_week, $second_week])->where('receive_status',1)->get();
+		$third_week_status = WayPlanSchedule::whereBetween('receive_date', [$second_week, $third_week])->where('receive_status',1)->get();
+		$last_week_status = WayPlanSchedule::whereBetween('receive_date', [$third_week, $last_week])->where('receive_status',1)->get();
+		$f_done_count = [];
+		$f_pend_count = [];
+		$f_reject_count = [];
+		$sec_done_count = [];
+		$sec_pend_count = [];
+		$sec_reject_count = [];
+		$th_done_count = [];
+		$th_pend_count = [];
+		$th_reject_count = [];
+		$last_done_count = [];
+		$last_pend_count = [];
+		$last_reject_count = [];
+		//first Week
+		foreach($first_week_status as $first_count)
+		{
+			if($first_count->customer_status == 2 && $first_count->reject_status == 0)
+			{
+				array_push($f_done_count,$first_count);
+			}
+			elseif($first_count->customer_status != 2 && $first_count->reject_status == 0)
+			{
+				array_push($f_pend_count,$first_count);
+			}
+			elseif($first_count->reject_status == 1)
+			{
+				array_push($f_reject_count,$first_count);
+			}
+		}
+		//Second Week
+		foreach($second_week_status as $second_count)
+		{
+			if($second_count->customer_status == 2 && $second_count->reject_status == 0)
+			{
+				array_push($sec_done_count,$second_count);
+			}
+			elseif($second_count->customer_status != 2 && $second_count->reject_status == 0)
+			{
+				array_push($sec_pend_count,$second_count);
+			}
+			else if($second_count->reject_status == 1)
+			{
+				array_push($sec_reject_count,$second_count);
+			}
+		}
+		//Third Week
+		foreach($third_week_status as $third_count)
+		{
+			if($third_count->customer_status == 2 && $third_count->reject_status == 0)
+			{
+				array_push($th_done_count,$third_count);
+			}
+			elseif($third_count->customer_status != 2 && $third_count->reject_status == 0) 
+			{
+				array_push($th_pend_count,$third_count);
+			}
+			elseif($third_count->reject_status == 1)
+			{
+				array_push($th_reject_count,$third_count);
+			}
+		}
+		//last Week
+		foreach($last_week_status as $last_count)
+		{
+			if($last_count->customer_status == 2 && $last_count->reject_status == 0)
+			{
+				array_push($last_done_count,$last_count);
+			}
+			elseif($last_count->customer_status != 2 && $last_count->reject_status == 0)
+			{
+				array_push($last_pend_count,$last_count);
+			}
+			elseif($last_count->reject_status == 1)
+			{
+				array_push($last_reject_count,$last_count);
+			}
+		}
+		
+		// dd($firstdate."--->".$first_week."-->".$second_week."-->".$third_week);
+		return response()->json([
+			"f_done" => count($f_done_count),
+			"f_pend" => count($f_pend_count),
+			"f_reject" => count($f_reject_count),
+			"sec_done" => count($sec_done_count),
+			"sec_pend" => count($sec_pend_count),
+			"sec_reject" =>count($sec_reject_count),
+			"th_done" => count($th_done_count),
+			"th_pend" => count($th_pend_count),
+			"th_reject" =>count($th_reject_count),
+			"last_done" => count($last_done_count),
+			"last_pend" =>count($last_pend_count),
+			"last_reject" =>count($last_reject_count),
+		]);
+		
+	}
 	protected function show_updateCharges($id)
 	{
 		// dd($id);
@@ -281,6 +458,7 @@ class OperatorController extends Controller
 	}
 	protected function store_wayplan_now(Request $request)
 	{
+
 		// dd($request->all());
 		$ldate = new DateTime('today');
 		$date = $ldate->format('Y-m-d');
@@ -338,7 +516,9 @@ class OperatorController extends Controller
 	{
 		$wayplan = WayPlanSchedule::all();
 		$location = Location::all();
-		return view('Admin.wayplan_list',compact('wayplan','location'));
+		$package = Package::all();
+		$ways = WayPlanSchedule::where('reject_status',0)->get();
+		return view('Admin.wayplan_list',compact('package','wayplan','location','ways'));
 	}
 	protected function generate_token(Request $request)
 	{
@@ -437,6 +617,44 @@ class OperatorController extends Controller
 			// dd($search_data);
 			return response()->json($search_data);
 	}
+	protected function advance_search_ajax(Request $request)
+	{
+		// dd($request->all());
+		if($request->advance_status == 1)
+		{
+		$way_plan_list = WayPlanSchedule::where('receive_point',$request->from)
+						->where('dropoff_point',$request->to)
+						->where('receive_date',$request->receive_date)
+						->where('customer_status',2)
+						->with('receivelocation')
+						->with('dropofflocation')
+						->get();
+						
+		}
+		elseif($request->advance_status == 2)
+		{
+			$way_plan_list = WayPlanSchedule::where('receive_point',$request->from)
+			->where('dropoff_point',$request->to)
+			->where('receive_date',$request->receive_date)
+			->where('customer_status','<>',2)
+			->with('receivelocation')
+			->with('dropofflocation')
+			->get();
+			
+		}
+		elseif($request->advance_status == 3)
+		{
+			$way_plan_list = WayPlanSchedule::where('receive_point',$request->from)
+			->where('dropoff_point',$request->to)
+			->where('receive_date',$request->receive_date)
+			->where('reject_status',1)
+			->with('receivelocation')
+			->with('dropofflocation')
+			->get();
+			
+		}
+		return response()->json($way_plan_list);
+	}
 	protected function changes_reject_way(Request $request)
 	{
 		// dd($request->all());
@@ -469,6 +687,63 @@ class OperatorController extends Controller
         $location = Location::all();
         $reject_way = WayPlanSchedule::where('reject_status',1)->with('receivelocation')->with('dropofflocation')->get();
         return view('Admin.reject_way_list',compact('reject_way','location'));
+
+
+		$ldate = new DateTime('today');
+		$date = $ldate->format('Y-m-d');
+		// dd($date);
+		// $validator = Validator::make($request->all(), [
+
+		// 	"perKg" => "required",
+		// 	"chargess" => "required",
+		// 	"customer_name" => "required",
+		// 	"token" => "required",
+		// 	"customer_phone" => "required",
+		// 	"cust_addr" => "required",
+		// 	"remark" => "required",
+		// 	"receive_point" => "required",
+		// 	"qty" => "required",
+		// 	"receive_date" => "required",
+		// 	"weight" => "required",
+		// 	"wg_type" => "required",
+		// 	"drop_point" => "required",
+		// 	"charge" => "required",
+		// 	"drop_date" => "required",
+		// 	"est_charge" => "required",
+
+		// ]);
+		// if ($validator->fails()) {
+
+		// 	alert()->error('Please Fill All Fields!');
+		// 	return redirect()->back();
+		// }
+		$store_wayplan = WayPlanSchedule::create([
+			'customer_name'=> $request->customer_name,
+			'customer_phone'=> $request->customer_phone,
+			'receive_point'=> $request->receive_point,
+			'receive_date'=> $request->receive_date,
+			'dropoff_point'=> $request->drop_point,
+			'dropoff_date'=> $request->drop_date,
+			'remark'=> $request->remark,
+			'parcel_quantity'=> $request->qty,
+			'total_weight'=> $request->weight,
+			'per_kg_charges'=> $request->perKg,
+			'package_id'=> $request->packageID,
+			'total_charges'=> $request->chargess,
+			'customer_address' => $request->cust_addr,
+			'myawady_date' => $date,
+			'customer_date' => $date,
+			'token' => $request->token,
+
+		]);
+		// dd($request->all());
+		alert()->success("Successfully Stored WayPlan Schedule!");
+		return back();
+
+	}
+	protected function wayplanlist()
+	{
+		return view('Admin.wayplanlist');
 
 	}
     protected function store_package(Request $request){
@@ -591,6 +866,7 @@ class OperatorController extends Controller
 
 		return view('Admin.profile', compact('admin', 'user_email'));
 	}
+
 	protected function counterProfile(Request $request,$counter_id)
 	{
 
@@ -1522,5 +1798,9 @@ class OperatorController extends Controller
 		alert()->success('Successfully Updated!');
 
 		return redirect()->back();
+	}
+	public function show_admin()
+	{
+		return view('Admin.dashboard');
 	}
 }

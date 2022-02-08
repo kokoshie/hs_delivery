@@ -1,15 +1,19 @@
 @extends('master')
 @section('title', 'Dashboard')
 @section('content')
+<div class="col-md-6">
+    <button class="btn btn-dark text-info" data-toggle="modal" data-target="#advance_modal" onclick="advance()"><i class="fas fa-search-plus mr-2"></i>Advance Search<i class="fas fa-arrow-right ml-2"></i></button>
+</div>
 <div class="row">
   <input type="hidden" id="searchtype">
   <input type="hidden" id="searchdatetype">
   <form action="{{ route('way_import') }}" method="POST" enctype="multipart/form-data" id="excelway">
     @csrf
-        <input type="file" id="excelwayfile" name="file" class="form-control input-sm mr-8 bg-info">
+        <input type="file" id="excelwayfile" name="file" class="form-control input-sm mr-8 bg-info d-none">
 
 
     </form>
+    <!--  -->
     <div class="col-md-3 mt-3" id="search_type">
         <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" id="rout" onchange="select_type(this.value)">
             <option selected>Choose Search Type</option>
@@ -24,11 +28,77 @@
     </div>
     <div class="col-md-5" style="padding-top:17px;padding-right:20px;">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button class="btn btn-primary" style="margin-top:5px;margin-left:px" onclick="searching()">Search</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-6">
                 <button type="button" class="btn btn-dark" style="margin-top:5px;" onclick="excel_import()">Import</button>
+                </div>
+                <form action="{{route('way_export_query')}}" method="post" id="way_query_export">
+                  @csrf
+                  <input type="hidden" name="way_route_from" id="way_route_from">
+                  <input type="hidden" name="way_route_to" id="way_route_to">
+                  <input type="hidden" name="way_status" id="way_status">
+                  <input type="hidden" name="way_date" id="way_date">
+                </form>
+                
+                <div class="col-md-6" style="margin-top:5px" id="replace_export">
+                <a href="{{route('way_export')}}" class="btn btn-success">Export</a>
+                </div>
+                <!-- Begin Advance Search Modal -->
+                <div class="modal fade" id="advance_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLongTitle">WayPlan Advance <span class="text-warning font-weight-bold">Filter</span></h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Route Name</label>
+                                <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" name="adv_route" id="adv_route">
+                                    <option selected hidden>Choose Routes</option>
+                                    @foreach($package as $pack)
+                                    <option data-from="{{$pack->from_city_id}}" data-to="{{$pack->to_city_id}}">{{$pack->from_city_name}} - {{$pack->to_city_name}} Route</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                              <label>Recieve Date</label>
+                              <input type="date" name="advance_date" id="adv_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Way Status</label>
+                                <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" name="adv_status" id="adv_status">
+                                    <option selected hidden>Choose Way Status</option>
+                                    
+                                    <option value="1">Done</option>
+                                    <option value="2">Pending</option>
+                                    <option value="3">Reject</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-4">
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary btn-block" onclick="search_adv()">Quick Search</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- End Advance Modal -->
+                
+              </div>
+               
+                
             </div>
         </div>
 
@@ -99,7 +169,7 @@
 
 
             <td>&nbsp;&nbsp;&nbsp;{{$way->parcel_quantity}}</td>
-            <td>{{$way->customer_phone}}</td>
+            <td class="text-center">{{$way->customer_phone}}</td>
             <td>{{$way->total_charges}}</td>
             <!-- <td><button href="{{route('way_change_status',$way->id)}}" type="button" class="btn btn-sm btn-danger"><i class="fas fa-ellipsis-h"></i>hello</button></td> -->
             <td><a href="{{route('way_change_status',$way->id)}}" class="btn btn-sm btn-primary">Change Status</a>
@@ -158,14 +228,22 @@
 
 <script>
  $(document).ready(function(){
-    // $('#show_route').hide();
-    // $('#show_phone').hide();
-    // $('#show_date').hide();
-    // $('#show_token').hide();
-    $('#excelwayfile').hide();
+    //localStorage
+    var way = @json($ways);
+
+    $('#way_lists').val(JSON.stringify(way));
+    // var item={id:parseInt(id),item_name:itemname,unit_name:unitname,current_qty:currentqty,order_qty:1,selling_price:saleprice,each_sub:eachsub};
+    
+    
+    
+    
+    
+    //end localstorage
+    // $('#excelwayfile').hide();
   })
   function excel_import()
   {
+      // $( "#excelwayfile" ).addClass( "d-block" );
       $('#excelwayfile').click();
   }
   $('#excelwayfile').change(function(){
@@ -401,6 +479,112 @@ function searching()
            }
           });
 }
+function advance()
+{
+  
+}
+function search_adv()
+{
+  $('#advance_modal').modal("hide");
+  var htmlexp = "";
+  htmlexp +=`<button type="" class="btn btn-dark" onclick="advance_export()">Export</button>`;
+  $('#replace_export').html(htmlexp);
+  // var id  = $('#adv_route').val();
+  var from_id = $('#adv_route').find(":selected").data('from');
+  var to_id = $('#adv_route').find(":selected").data('to');
+  var advance_date = $('#adv_date').val();
+  var advance_status = $('#adv_status').val();
+  $('#way_route_from').val(from_id);
+  $('#way_route_to').val(to_id);
+  $('#way_date').val(advance_date);
+  $('#way_status').val(advance_status);
+  $.ajax({
+        type:'POST',
+        url:'/advance_search',
+        dataType:'json',
+        data:{
+            "_token": "{{ csrf_token() }}",
+            "from":from_id,
+            "to":to_id,
+            "receive_date" : advance_date,
+            "advance_status" : advance_status,
+
+        },
+
+        success:function(data){
+            var htmlways="";
+            $.each(data,function(i,v){
+              var url = "{{url('/way_change_status')}}/"+v.id;
+              htmlways +=`
+                <tr>
+            <td>${i+1}.</td>
+            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>`;
+            if(v.way_status == 0)
+            {
+            htmlways +=`
+            <td><span class="badge badge-light border border-danger mt-1 text-danger">Pending</span></td>`;
+            }
+            else
+            {
+            htmlways +=`
+            <td><span class="badge badge-light border border-success mt-1 text-success">Done</span></td>`;
+            }
+
+            if(v.receive_status == 0)
+            {
+              htmlways +=`
+              <td>${v.receivelocation.name}</td>
+              `;
+            }
+            else if(v.receive_status == 1 && v.myawady_status != 2 && v.way_status != 1)
+            {
+            htmlways +=`
+            <td>${v.receivelocation.name}</td>
+            `;
+            }
+            else if(v.myawady_status == 2 && v.dropoff_status != 2 && v.way_status != 1)
+            {
+              htmlways +=`
+              <td>MyaWady</td>
+              `;
+            }
+            else if(v.dropoff_status == 2 && v.customer_status != 2 && v.way_status != 1)
+            {
+              htmlways +=`
+              <td>${v.dropofflocation.name}</td>
+              `;
+            }
+            else if(v.way_status == 1)
+            {
+              htmlways +=`
+              <td>${v.customer_address}</td>
+              `;
+            }
+            htmlways +=`
+            <td>&nbsp;&nbsp;&nbsp;${v.parcel_quantity}</td>
+            <td>${v.customer_phone}</td>
+            <td>${v.total_charges}</td>
+
+            <td><a href="${url}" class="btn btn-sm btn-primary">Change Status</a>
+            <a href="" class="btn btn-sm btn-danger">Reject</a>
+            </td>
+            </tr>
+            `;
+                
+                
+            });
+            $('#search_result').html(htmlways);
+        }
+      });
+
+// alert(from_id+"---"+to_id+"==="+advance_date);
+}
+function advance_export()
+{
+  alert("Advance - Export");
+  $('#way_query_export').submit();
+}
+
 </script>
 
 @endsection

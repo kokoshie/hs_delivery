@@ -76,7 +76,7 @@
 
                         <a class="dropdown-item" href="{{route('change_admin_pw_ui')}}">Change Password</a>
 
-                        @elseif(session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('DoctorC'))
+                        @elseif(session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('DoctorC') || session()->get('user')->hasRole('Operator') || session()->get('user')->hasRole('Manager'))
                         <a class="dropdown-item" href="">My Profile</a>
 
                         {{-- <a class="dropdown-item" href="{{route('change_doc_pw_ui')}}">Change Password</a> --}}
@@ -150,6 +150,8 @@
                         <li>
                             <a href="{{route('admin_dashboard')}}"><i class="bluecolor fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
+
+
 
 
                         @if(session()->get('user')->hasRole('Employee'))
@@ -247,9 +249,9 @@
                         </li>
                         @endif
                         @endif
-                        @if(session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('DoctorC'))
+                        @if(session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('DoctorC') || session()->get('user')->hasRole('Manager'))
                         <li>
-                            <a href="{{route('admin_dashboard')}}"><i class="bluecolor fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="{{route('manager_dashboard')}}"><i class="bluecolor fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
                         {{-- <li>
                             <a href="{{route('doc.profile')}}"><i class="bluecolor fas fa-table"></i><span>Master Data</span></a>
@@ -276,21 +278,23 @@
 
                                 <li><a href="{{route('schedule')}}"><i class="bluecolor fas fa-cube mr-1"></i>Wayplan Register<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
 
+
                                 <li><a href="{{route('wayplan_list')}}"><i class="bluecolor fas fa-cube mr-1"></i>Wayplan Lists<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
 
                                 <li><a href="{{route('reject_way_list')}}"><i class="bluecolor fas fa-cube mr-1"></i> Reject Way<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
+
                             </ul>
                         </li>
-                        @if (session()->get('user')->hasRole('Doctor'))
+                        @if (session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('Manager'))
                         <li>
-                            <a href="{{route('doctor.manualbookings')}}"><i class="pinkcolor fa fa-hospital-o"></i><span>Manual Booking</span></a>
+                            <a href="{{route('employee_list')}}"><i class="bluecolor fas fa-users"></i><span>Employee List</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{route('doctor.onlinebookings')}}"><i class="pinkcolor fas fa-laptop-medical"></i><span>Online Booking</span></a>
                         </li>
                         <li>
                             <a href="{{route('doctor.patientHistory')}}"><i class="pinkcolor fas fa-file-signature"></i><span>Patient History</span></a>
-                        </li>
+                        </li> --}}
 
 
                         @elseif(session()->get('user')->hasRole('DoctorC'))
@@ -399,7 +403,23 @@
                         @endif
 
                         @endif
+                        @if(session()->get('user')->hasRole('Operator'))
+                        <li class="submenu">
+                            <a href="#"><i class="bluecolor fas fa-map-signs"></i><span>Way Management</span> <span class="menu-arrow"></span></a>
 
+                            <ul style="display: none;">
+
+                                <li><a href="{{route('schedule')}}"><i class="bluecolor fas fa-cube mr-1"></i>Wayplan Register<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
+
+
+                                <li><a href="{{route('wayplan_list')}}"><i class="bluecolor fas fa-cube mr-1"></i>Wayplan Lists<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
+
+                                <li><a href="{{route('reject_way_list')}}"><i class="bluecolor fas fa-cube mr-1"></i> Reject Way<i class="float-right  bluecolor fas fa-angle-right"></i></a></li>
+
+                            </ul>
+                        </li>
+
+                        @endif
 
                         <li>
                             <a href="{{route('logout')}}"><i class="bluecolor fa fa-power-off"></i> <span>Logout</span></a>
@@ -444,7 +464,12 @@
     <script src="{{asset('assets/js/app.js')}}"></script>
 
     <script src="{{asset('assets/js/validation.js')}}"></script>
+    <script src="{{asset('assets/js/Chart.bundle.min.js')}}"></script>
 
+    {{-- Barchart --}}
+    
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     @yield('js')
 
 </body>

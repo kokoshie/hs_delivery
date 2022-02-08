@@ -4,6 +4,7 @@ use App\Doctor;
 use App\Events\DoctorChange;
 use App\Events\TestingEvent;
 use App\Http\Controllers\ExcelWayPlanImportController;
+
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -23,6 +24,12 @@ Route::get('/pusher', function(){
 });
 
 Route::get('/', 'Web\FrontendController@index')->name('frontend.home');
+
+Route::get('/search_track', 'Web\FrontendController@search_track')->name('search_track');
+Route::post('/tk_search', 'Web\FrontendController@tk_search')->name('tk_search');
+Route::post('/detail_info', 'Web\FrontendController@detail_info')->name('detail_info');
+// Route::post('search_token', 'Web\FrontendController@search_token')->name('search_token');
+Route::get('/Admin', 'Web\FrontendController@index1')->name('frontend.home1');
 
 Route::get('/login', 'Web\LoginController@index')->name('login_page');
 // Route::get('/', 'Web\LoginController@index')->name('login_page');
@@ -90,16 +97,31 @@ Route::group(['middleware' => ['UserAuth']], function () {
 	//Operator Controller
 
 	Route::get('AdminDashboard', 'Web\OperatorController@AdminDashboard')->name('admin_dashboard');
+    Route::get('manager_dashboard', 'Web\OperatorController@manager_dashboard')->name('manager_dashboard');
+	Route::get('employee_list', 'Web\OperatorController@employee_list')->name('employee_list');
+    Route::post('store_employee', 'Web\OperatorController@store_employee')->name('store_employee');
+    Route::get('delete_employee/{id}', 'Web\OperatorController@delete_employee')->name('delete_employee');
+    Route::get('update_employee/{id}', 'Web\OperatorController@update_employee')->name('update_employee');
 
     //master data
     Route::get('township', 'Web\OperatorController@township')->name('township');
     Route::get('charges', 'Web\OperatorController@charges')->name('charges');
     Route::post('store_package','Web\OperatorController@store_package')->name('store_package');
     Route::get('schedule', 'Web\OperatorController@schedule')->name('schedule');
+	Route::get('admin_das', 'Web\OperatorController@show_admin');
+	Route::post('get_month', 'Web\OperatorController@change_barchart')->name('get_month');
+	Route::post('get_week', 'Web\OperatorController@change_barchart_week')->name('get_week');
+	
+
+
+    Route::get('wayplanlist', 'Web\OperatorController@wayplanlist')->name('wayplanlist');
+
+
 	Route::get('show_update_charges/{id}', 'Web\OperatorController@show_updateCharges')->name('show_update_charges');
 	Route::post('store_update_charges', 'Web\OperatorController@store_updateCharges')->name('store_update_charges');
 	Route::post('find_point', 'Web\OperatorController@find_point_result')->name('find_point');
 	Route::post('store_wayplan', 'Web\OperatorController@store_wayplan_now')->name('store_wayplan');
+
 	Route::get('wayplan_list','Web\OperatorController@show_wayplan_list')->name('wayplan_list');
 	Route::post('generate_Token','Web\OperatorController@generate_token')->name('generate_Token');
 	Route::get('way_change_status/{id}','Web\OperatorController@change_way_status')->name('way_change_status');
@@ -108,9 +130,13 @@ Route::group(['middleware' => ['UserAuth']], function () {
 	Route::post('searching_ajax','Web\OperatorController@searching_ajax_result')->name('searching_ajax');
 	Route::post('reject_way','Web\OperatorController@changes_reject_way')->name('reject_way');
     Route::get('reject_way_list','Web\OperatorController@show_reject_way')->name('reject_way_list');
-
+	Route::post('advance_search','Web\OperatorController@advance_search_ajax')->name('advance_search');
+	
 
     Route::post('way_import','ExcelWayPlanImportController@store_wayexcel_import')->name('way_import');
+	Route::post('way_export','ExcelWayPlanExportController@wayexcel_export')->name('way_export');
+	Route::post('way_export_query','ExcelWayPlanExportController@wayexcel_export_query')->name('way_export_query');
+	
 
 
 

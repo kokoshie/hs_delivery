@@ -882,6 +882,21 @@ input[type=text] {
     border: 0;
 }
 
+<<<<<<< HEAD
+=======
+
+#rout{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color:rgb(41, 87, 236) ;
+    border-radius: 8px;
+}
+
+
+
+>>>>>>> cc76a2212fe427c3e2eac14a657648570f5725c2
 #way option{
     width:150px;
     color: black;
@@ -1741,6 +1756,15 @@ ul.chat-user-total li i.old-users {
 	padding: 5px;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/* login modal */
+
+
+=======
+>>>>>>> b86475663c72ba60b57f2adc20141c396db86742
+>>>>>>> cc76a2212fe427c3e2eac14a657648570f5725c2
 /*-----------------
 	14. Edit Profile
 -----------------------*/
@@ -5018,3 +5042,35 @@ blockquote p {
   #itemsearch{
 	  margin-bottom: 1em;
   }
+
+  /* Barchart */
+  *{
+    margin: 0; padding:0; box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+    color: #333;
+    padding: 20px;
+    background: #f8f8f8;
+}
+.card {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0px 22px 22px -20px rgba(0,0,0,0.3);
+}
+    
+    header {
+        height: 50px;
+        background: #ccc;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .main {
+        padding: 20px;
+        background: #fff;
+        border-radius: 0 0 8px 8px;
+    }
