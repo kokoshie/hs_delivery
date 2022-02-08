@@ -15,16 +15,17 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>LaslesVPN | Landing &amp; Corporate Template</title>
+        <title>HS Cargo Service</title>
 
 
         <!-- ===============================================-->
         <!--    Favicons-->
         <!-- ===============================================-->
         <link rel="apple-touch-icon" sizes="180x180" href="{{asset('frontend/assets/img/favicons/apple-touch-icon.png')}}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontend/assets/img/favicons/favicon-32x32.png')}}">
+        {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontend/assets/img/favicons/favicon-32x32.png')}}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{asset('frontend/assets/img/favicons/favicon-16x16.png')}}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/img/favicons/favicon.ico')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/img/favicons/favicon.ico')}}"> --}}
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/img/logo1update.jpg')}}">
         <link rel="manifest" href="{{asset('frontend/assets/img/favicons/manifest.json')}}">
         <meta name="msapplication-TileImage" content="{{asset('frontend/assets/img/favicons/mstile-150x150.png')}}">
         <meta name="theme-color" content="#ffffff">
@@ -81,11 +82,11 @@
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto border-bottom border-lg-bottom-0 pt-2 pt-lg-0">
-            <li class="nav-item"><a class="nav-link" href="#about"><span style="color:rgb(81, 102, 223);font-size:17px;">About</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#features"><span style="color:rgb(81, 102, 223);font-size:17px;">Features</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#plan"><span style="color:rgb(81, 102, 223);font-size:17px;">Pricing</span> </a></li>
-            <li class="nav-item"><a class="nav-link" href="#test"><span style="color:rgb(81, 102, 223);font-size:17px;">Testimonials</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#help"><span style="color:rgb(81, 102, 223);font-size:17px;">Contact Us </span></a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#about"><span style="color:rgb(81, 102, 223);font-size:17px;">About</span></a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#features"><span style="color:rgb(81, 102, 223);font-size:17px;">Features</span></a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#plan"><span style="color:rgb(81, 102, 223);font-size:17px;">Pricing</span> </a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#test"><span style="color:rgb(81, 102, 223);font-size:17px;">Network</span></a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#help"><span style="color:rgb(81, 102, 223);font-size:17px;">Contact Us </span></a></li>
           </ul>
           {{-- <form class="d-flex py-3 py-lg-0"> --}}
             {{-- <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button">Loi in</button> --}}

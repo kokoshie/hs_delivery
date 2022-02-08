@@ -8,10 +8,10 @@ use Laravel\Passport\HasApiTokens;
 use App\LinkedSocialAccount;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     protected $guarded = [];
-    
+
     use HasApiTokens, Notifiable;
 
     /**
@@ -63,7 +63,7 @@ class User extends Authenticatable
             }
         }
         return false;
-    }   
+    }
     public function isOwner($ownerstatus) {
         foreach ($this->roles as $role) {
             if ($role->ownerstatus == $ownerstatus) {
@@ -71,7 +71,7 @@ class User extends Authenticatable
             }
         }
         return false;
-    }   
+    }
 
     public function assignRole($role) {
         return $this->roles()->attach($role);
@@ -88,6 +88,6 @@ class User extends Authenticatable
             }
         }
         return false;
-    }   
+    }
 
 }

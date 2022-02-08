@@ -23,7 +23,7 @@ class CreateWayPlanSchedulesTable extends Migration
             $table->integer('dropoff_point');
             $table->string('dropoff_address');
             $table->date('dropoff_date');
-            $table->integer('tracking_id');
+            $table->string('tracking_id');
             $table->string('remark');
             $table->integer('parcel_quantity');
             $table->integer('total_weight');

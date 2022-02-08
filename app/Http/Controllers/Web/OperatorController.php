@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Web;
 
 use App\Day;
+use App\Role;
 use App\Town;
 use App\User;
 use DateTime;
 use App\Admin;
 use App\State;
 use App\Doctor;
-use App\Location;
 use App\Booking;
+use App\Package;
 use App\Patient;
 use App\Voucher;
 use App\Employee;
+use App\Location;
 use Carbon\Carbon;
 use App\Department;
 use App\DoctorInfo;
@@ -22,13 +24,13 @@ use App\Appointment;
 use App\Announcement;
 use App\Advertisement;
 use App\Traits\ZoomJWT;
+use App\PackageKg_Price;
+use App\WayPlanSchedule;
+use CreateRoleUserTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Package;
-use App\PackageKg_Price;
-use App\Role;
-use App\WayPlanSchedule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -182,8 +184,11 @@ class OperatorController extends Controller
 	protected function employee_list(Request $request){
         $roles = Role::all();
         $users = User::all();
+
+        $ro_us4 = DB::table('role_user')->where('role_id',4)->count();
+        $ro_us = DB::table('role_user')->where('role_id',5)->count();
         // dd($users);
-		return view('Admin.employee_list',compact('roles','users'));
+		return view('Admin.employee_list',compact('roles','users','ro_us4','ro_us'));
 	}
 
     protected function store_employee(Request $request){
@@ -193,6 +198,14 @@ class OperatorController extends Controller
         $email = $request->email;
         $pass = Hash::make($request->password);
         $phone = $request->phone;
+
+        // dd($ro_us5);
+
+
+        // dd($ro_us4,$ro_us);
+        // if($ro_us >= 3 ){
+        //     alert()->error('no more create!');
+        // }
 
        $user =  User::create([
             'name' => $name,
@@ -204,6 +217,7 @@ class OperatorController extends Controller
         $user->assignRole($request->role);
         alert()->success('Sucessfully Employee Created!!');
 
+
 			return redirect()->back();
 
 	}
@@ -211,7 +225,8 @@ class OperatorController extends Controller
     protected function delete_employee($id){
 
             // dd($id);
-            User::find($id)->delete();
+        $del = DB::table('role_user')->where('user_id',$id)->delete();
+        User::find($id)->delete();
         return redirect()->back();
     }
 

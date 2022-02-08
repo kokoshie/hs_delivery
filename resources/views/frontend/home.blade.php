@@ -17,7 +17,7 @@
         <div class="row flex-center">
 
           <div class="col-lg-6 col-md-5 order-md-1">
-               <img class="img-fluid" src="{{asset('frontend/assets/img/pic1.jpg')}}" alt=""/> 
+               <img class="img-fluid" src="{{asset('frontend/assets/img/pic1.jpg')}}" alt=""/>
               <!-- <div id="carouselExampleIndicators" class="carousel slide col-lg-6 col-md-5 order-md-1" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -31,9 +31,9 @@
                   </div>
                 </div>
               </div> -->
-          </div> 
+          </div>
           <div class="col-md-7 col-lg-6 mt-5 text-md-start">
-            
+
             <h5 class="fw-medium"><span style="background-color:#ae17db;color:#fff; " class="py-1 mb-2"> &nbsp;&nbsp; မိတ်ဆက် &nbsp;&nbsp;</span></h5>
 
             <p class="mt-2 mb-4" style="font-style:italic;color:black;text-indent :5em;">
@@ -65,8 +65,11 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
                   </div>
               </div>
             </div>
-            <div class="carousel-item">
+            {{-- <div class="carousel-item">
                     <img class="" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt="Second slide" width="1108" height="538">
+           </div> --}}
+           <div class="carousel-item">
+            <img class="" src="{{asset('frontend/assets/img/hspic2.jpg')}}" alt="Second slide" width="1108" height="538">
            </div>
 
           </div>
@@ -149,45 +152,81 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
 
 
     <!-- ============================================-->
-    <!-- <section> begin ============================-->
-    <section class="pt-4 pt-md-6" id="features">
+     <!-- <section> begin ============================-->
+        <section class="pt-4 pt-md-6" id="features">
 
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt=""/></div>
-          <div class="col-md-7 col-lg-5 text-center text-md-start">
-            <h2>We Provide Many <br />Features You Can Use</h2>
-            <p> You can explore the features that we provide with fun and have their own functions each feature.</p>
-            <div class="d-flex">
-              <svg class="bi bi-check-circle-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2FAB73" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-              </svg>
-              <p class="ms-2">Powerfull online protection.</p>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt=""/></div>
+                <div class="col-md-7 col-lg-5 text-center text-md-start">
+                  <h4 class="" style="color: #ae17db"><u>Rules and Regulation fot HS Cargo Service</u></h4>
+                  <div class="d-flex mt-2">
+                    <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">I guarantee that I am the owner of the goods that will be transported.</p>
+                  </div>
+                  <div class="d-flex mt-1">
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp ">I agree as a customer or recipient that HS cargo is not concerned with any illegal or unlawful goods whatsoever.</p>
+                  </div>
+                  <div class="d-flex mt-1">
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">HS Cargo will not be responsible for the consequences of goods that are successfully received and signed by customer.</p>
+                  </div>
+                  <div class="d-flex mt-1">
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">If there is any issue on the goods that didn't pay insurance fee, HS cargo will only compansate 10 times of the delivery fee.
+                        &nbsp;&nbsp;&nbsp;<a class="seemore" style="color:#1e0c24;" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target="#collapseExample" onclick="btnhide()">see more....</a>
+                    </p>
+                  </div>
+
+                  <button class="button design seemore" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
+                  data-target="#imgModal"><span>See Document</span></button>
+                  <div class="collapse" id="collapseExample">
+                      <div class="d-flex mt-1">
+                        <i class="bluecolor fas fa-check"></i><p class="ms-2 ppp">Insurance fee is to provide a compensation for the loss or damage of expensive and valueable goods according to the original worth of the goods.Insurance fee is charged 5% of the good's price.</p>
+                      </div>
+                      <div class="d-flex mt-1">
+                        <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">I completely agree with the above terms and conditions as a customer or recipient.</p>
+                      </div>
+                      <button class="button design" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
+                       data-target="#imgModal"><span>See Document</span></button>
+                      <a href="#features" class="previous design1" onclick="close_coll()">&laquo; Previous</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="d-flex">
-              <svg class="bi bi-check-circle-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2FAB73" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-              </svg>
-              <p class="ms-2">Internet without borders.</p>
-            </div>
-            <div class="d-flex">
-              <svg class="bi bi-check-circle-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2FAB73" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-              </svg>
-              <p class="ms-2">Supercharged VPN.</p>
-            </div>
-            <div class="d-flex">
-              <svg class="bi bi-check-circle-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2FAB73" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-              </svg>
-              <p class="ms-2">Internet without borders.</p>
-            </div>
+
+            <div class="modal fade"
+            id="imgModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+           <div class="modal-dialog"
+                role="document">
+               <div class="modal-content">
+                   <!-- Modal heading -->
+                   {{-- <div class="modal-header">
+                       <h5 class="modal-title"
+                           id="exampleModalLabel">
+                         Rule and Regulations for HS Cargo's Customer
+                     </h5>
+                       <button type="button"
+                               class="close"
+                               data-dismiss="modal"
+                               aria-label="Close">
+                           <span aria-hidden="true">
+                             ×
+                         </span>
+                      </button>
+                  </div> --}}
+
+                  <!-- Modal body with image -->
+                  <div class="modal-body">
+                      <img src="{{asset('frontend/assets/img/pp2.jpg')}}" width="470"/>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-      <!-- end of .container-->
+            <!-- end of .container-->
 
-    </section>
+          </section>
     <!-- <section> close ============================-->
     <!-- ============================================-->
 
@@ -195,279 +234,108 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
 
 
     <!-- ============================================-->
-    <!-- <section> begin ============================-->
+   <!-- <section> begin ============================-->
     <section class="bg-100 py-7" id="plan">
 
-      <div class="container-lg">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-5 text-center mb-3">
-            <h2>Choose Your Plan</h2>
-            <p style="color:black">Let's choose the package that is best for you and explore it happily and cheerfully.</p>
-          </div>
-        </div>
-        <div class="row h-100 justify-content-center">
-            <div class="col-md-3 pt-4">
-                <div class="card" style="max-width: 18rem;">
-                    {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
-
-                    <div class="card-body card_color">
-                            <h4 class="text-center" style="color:#fff">BKK - YGN</h4>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">1-50 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">2000 KS</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">50-100 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1800 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">100-300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1500 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">Above 300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1100 Ks</p></div>
-                        </div>
-                     </div>
-                  </div>
-            </div>
-            <div class="col-md-3 pt-4">
-                <div class="card" style="max-width: 18rem;">
-                    {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
-
-                    <div class="card-body card_color">
-                            <h4 class="text-center" style="color:#fff">BKK - MDY</h4>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">1-50 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">2400 KS</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">50-100 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">2200 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">100-300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1800 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">Above 300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1300 Ks</p></div>
-                        </div>
-                     </div>
-                  </div>
-            </div>
-            <div class="col-md-3 pt-4">
-                <div class="card" style="max-width: 18rem;">
-                    {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
-
-                    <div class="card-body card_color">
-                            <h4 class="text-center" style="color:#fff">Measot - YGN</h4>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">1-50 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1700 KS</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">50-100 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1500 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">100-300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1300 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">Above 300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">900 Ks</p></div>
-                        </div>
-                     </div>
-                  </div>
-            </div>
-            <div class="col-md-3 pt-4">
-                <div class="card" style="max-width: 18rem;">
-                    {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
-
-                    <div class="card-body card_color">
-                            <h4 class="text-center" style="color:#fff">Maesot - MDY</h4>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">1-50 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">2000 KS</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">50-100 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1800 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">100-300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1500 Ks</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 mt-3"><p class="p_card">Above 300 KG</p></div>
-                            <div class="col-md-5 mt-3"><p class="p_card">1100 Ks</p></div>
-                        </div>
-                     </div>
-                  </div>
-            </div>
-
-        {{-- <div class="col-md-3 pt-4">
-          <div class="card border-primary mb-3" style="max-width: 18rem;">
-              <div class="card-header text-center">Measot - YGN</div>
-              <div class="card-body">
-                  <div class="row">
-                  <span class="col-md-7">1-50 KG</span>
-                  <span class="col-md-5">2000 Ks</span>
-                  <hr>
-                  </div>
-                  <div class="row">
-                  <span class="col-md-7">50-100 KG</span>
-                  <span class="col-md-5">1800 Ks</span>
-                  <hr>
-                  </div>
-                  <div class="row">
-                  <span class="col-md-7">100-300 KG</span>
-                  <span class="col-md-5">1500 Ks</span>
-                  <hr>
-                  </div>
-                  <div class="row">
-                  <span class="col-md-7">Above 300 KG</span>
-                  <span class="col-md-5">1100 Ks</span>
-                  <hr>
-                  </div>
-
-
-
-              </div>
-            </div>
-      </div> --}}
-
-          {{-- <div class="col-md-4 pt-4 px-md-2 px-lg-3">
-            <div class="card h-100">
-              <div class="card-body d-flex flex-column justify-content-around mx-auto">
-                <div class="text-center">
-                  <h5 class="my-4">BKK - YGN </h5>
-                </div> --}}
-
-                {{-- <ul class="list-unstyled">
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Unlimited Bandwidth
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Encrypted Connection
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>No Traffic Logs
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Works on All Devices
-                  </li>
-                </ul>
-                <div class="text-center my-5">
-                  <h2 class="mb-3">Free
-                  </h2>
-                  <button class="btn outline rounded-pill" type="submit">Sign Up </button>
-                </div> --}}
-              {{-- </div>
-            </div>
-          </div> --}}
-          {{-- <div class="col-md-4 pt-4 px-md-2 px-lg-3">
-            <div class="card h-100">
-              <div class="card-body d-flex flex-column justify-content-around mx-auto">
-                <div class="text-center pt-5"><img class="img-fluid" src="{{asset('frontend/assets/img/icons/pricing.png')}}" alt="" />
-                  <h5 class="my-4">Standard Plan</h5>
-                </div>
-                <ul class="list-unstyled">
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Unlimited Bandwidth
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Encrypted Connection
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Yes Traffic Logs
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Works on All Devices
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Connect Anyware
-                  </li>
-                </ul>
-                <div class="text-center my-5">
-                  <h2 class="mb-3">$9<span class="text-900">/mo</span>
-                  </h2>
-                  <button class="btn outline rounded-pill" type="submit">Sign Up </button>
-                </div>
-              </div>
+        <div class="container-lg">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5 text-center mb-3">
+              <h2>Choose Your Plan</h2>
             </div>
           </div>
-          <div class="col-md-4 pt-4 px-md-2 px-lg-3">
-            <div class="card h-100">
-              <div class="card-body d-flex flex-column justify-content-around mx-auto">
-                <div class="text-center pt-5"><img class="img-fluid" src="{{asset('frontend/assets/img/icons/pricing.png')}}" alt="" />
-                  <h5 class="my-4">Premium Plan</h5>
-                </div>
-                <ul class="list-unstyled">
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Unlimited Bandwidth
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Encrypted Connection
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Yes Traffic Logs
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Works on All Devices
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Connect Anyware
-                  </li>
-                  <li class="mb-3"><span class="me-2">
-                      <svg class="bi bi-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2FAB73" viewBox="0 0 16 16">
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                      </svg></span>Get New Features
-                  </li>
-                </ul>
-                <div class="text-center my-5">
-                  <h2 class="mb-3">$12<span class="text-900">/mo</span>
-                  </h2>
-                  <button class="btn outline btn-glow rounded-pill" type="submit">Sign Up</button>
-                </div>
-              </div>
-            </div>
-          </div> --}}
-        </div>
-      </div>
-      <!-- end of .container-->
+          <div class="row h-100 justify-content-center">
+              <div class="col-md-3 pt-4">
+                  <div class="card" style="max-width: 18rem;">
+                      {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
 
-    </section>
-    <!-- <section> close ============================-->
+                      <div class="card-body card_color">
+                              <h4 class="text-center" style="color:#fff">BKK - YGN</h4>
+                          @foreach ($packages as $p)
+                            @foreach ($packageKg as $pp)
+                              @if ($p->id == $pp->package_id)
+                                  @if (($p->from_city_name == 'BKK' && $p->to_city_name == 'YGN') || ($p->from_city_name == 'YGN' && $p->to_city_name == 'BKK'))
+                                  <div class="row mt-2">
+                                      <div class="col-md-6"><p class="p_card">{{$pp->min_kg}} - {{$pp->max_kg}} KG</p></div>
+                                      <div class="col-md-6"><p class="p_card">{{$pp->per_kg_price}} {{$pp->currency}}</p></div>
+                                  </div>
+                                  @endif
+                              @endif
+                            @endforeach
+                          @endforeach
+                       </div>
+                    </div>
+              </div>
+              <div class="col-md-3 pt-4">
+                  <div class="card" style="max-width: 18rem;">
+                      {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
+
+                      <div class="card-body card_color">
+                              <h4 class="text-center" style="color:#fff">BKK - MDY</h4>
+                          @foreach ($packages as $p)
+                            @foreach ($packageKg as $pp)
+                              @if ($p->id == $pp->package_id)
+                                  @if (($p->from_city_name == 'BKK' && $p->to_city_name == 'MDY') || ($p->from_city_name == 'MDY' && $p->to_city_name == 'BKK'))
+                                  <div class="row mt-2">
+                                      <div class="col-md-6"><p class="p_card">{{$pp->min_kg}} - {{$pp->max_kg}} KG</p></div>
+                                      <div class="col-md-6"><p class="p_card">{{$pp->per_kg_price}} {{$pp->currency}}</p></div>
+                                  </div>
+                                  @endif
+                              @endif
+                            @endforeach
+                          @endforeach
+                       </div>
+                    </div>
+              </div>
+              <div class="col-md-3 pt-4">
+                  <div class="card" style="max-width: 18rem;">
+                      {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
+
+                      <div class="card-body card_color">
+                              <h4 class="text-center" style="color:#fff">Measot - YGN</h4>
+                          @foreach ($packages as $p)
+                            @foreach ($packageKg as $pp)
+                              @if ($p->id == $pp->package_id)
+                                  @if (($p->from_city_name == 'MAESOT' && $p->to_city_name == 'YGN') || ($p->from_city_name == 'YGN' && $p->to_city_name == 'MAESOT'))
+                                  <div class="row mt-2">
+                                      <div class="col-md-6"><p class="p_card">{{$pp->min_kg}} - {{$pp->max_kg}} KG</p></div>
+                                      <div class="col-md-6"><p class="p_card">{{$pp->per_kg_price}} {{$pp->currency}}</p></div>
+                                  </div>
+                                  @endif
+                              @endif
+                            @endforeach
+                          @endforeach
+                       </div>
+                    </div>
+              </div>
+              <div class="col-md-3 pt-4">
+                  <div class="card" style="max-width: 18rem;">
+                      {{-- <div class="card-header text-center header">BKK - YGN</div> --}}
+
+                      <div class="card-body card_color">
+                              <h4 class="text-center" style="color:#fff">Maesot - MDY</h4>
+                          @foreach ($packages as $p)
+                            @foreach ($packageKg as $pp)
+                              @if ($p->id == $pp->package_id)
+                                  @if (($p->from_city_name == 'MAESOT' && $p->to_city_name == 'MDY') || ($p->from_city_name == 'MDY' && $p->to_city_name == 'MAESOT'))
+                                  <div class="row mt-2">
+                                      <div class="col-md-6"><p class="p_card">{{$pp->min_kg}} - {{$pp->max_kg}} KG</p></div>
+                                      <div class="col-md-6"><p class="p_card">{{$pp->per_kg_price}} {{$pp->currency}}</p></div>
+                                  </div>
+                                  @endif
+                              @endif
+                            @endforeach
+                          @endforeach
+
+                       </div>
+                    </div>
+              </div>
+
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
     <!-- ============================================-->
 
 
@@ -835,3 +703,17 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
     <!-- ============================================-->
 
 @endsection
+
+@section('js')
+<script>
+    function btnhide(){
+      $('.seemore').hide();
+    }
+    function close_coll(){
+        $('.collapse').collapse('hide');
+        // alert('hellolllll');
+        $('.seemore').show();
+    }
+</script>
+@endsection
+

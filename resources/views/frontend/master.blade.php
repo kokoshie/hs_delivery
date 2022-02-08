@@ -9,16 +9,16 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>LaslesVPN | Landing &amp; Corporate Template</title>
+        <title>HS Cargo Services</title>
 
 
         <!-- ===============================================-->
         <!--    Favicons-->
         <!-- ===============================================-->
         <link rel="apple-touch-icon" sizes="180x180" href="{{asset('frontend/assets/img/favicons/apple-touch-icon.png')}}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontend/assets/img/favicons/favicon-32x32.png')}}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('frontend/assets/img/favicons/favicon-16x16.png')}}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/img/favicons/favicon.ico')}}">
+        {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontend/assets/img/favicons/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('frontend/assets/img/favicons/favicon-16x16.png')}}"> --}}
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/assets/img/logo1update.jpg')}}">
         <link rel="manifest" href="{{asset('frontend/assets/img/favicons/manifest.json')}}">
         <meta name="msapplication-TileImage" content="{{asset('frontend/assets/img/favicons/mstile-150x150.png')}}">
         <meta name="theme-color" content="#ffffff">
@@ -77,7 +77,7 @@
             <li class="nav-item px-4"><a class="nav-link" href="#about"><span style="color:rgb(81, 102, 223);font-size:17px;">About</span></a></li>
             <li class="nav-item px-4"><a class="nav-link" href="#features"><span style="color:rgb(81, 102, 223);font-size:17px;">Features</span></a></li>
             <li class="nav-item px-4"><a class="nav-link" href="#plan"><span style="color:rgb(81, 102, 223);font-size:17px;">Pricing</span> </a></li>
-            <li class="nav-item px-4"><a class="nav-link" href="#test"><span style="color:rgb(81, 102, 223);font-size:17px;">Testimonials</span></a></li>
+            <li class="nav-item px-4"><a class="nav-link" href="#test"><span style="color:rgb(81, 102, 223);font-size:17px;">Network</span></a></li>
             <li class="nav-item px-4"><a class="nav-link" href="#help"><span style="color:rgb(81, 102, 223);font-size:17px;">Help </span></a></li>
           </ul>
           {{-- <form class="d-flex py-3 py-lg-0"> --}}

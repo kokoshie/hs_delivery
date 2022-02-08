@@ -21,7 +21,7 @@
                    <div id="det" class="mt-4">
 
                    </div>
-        
+
                    <div class=" offset-2 col-md-8" id="ph">
                    <table class="table table-striped">
                     <thead  class="thead-dark">
@@ -157,9 +157,12 @@ function show_det(){
               //  alert(data.type);
               // alert(data.orders.customer_name[0]);
             var htmlcard = "";
+            var htmlcard1 = "";
             var htmltable = "";
             $.each(data.orders, function(i, v) {
                 // alert(v.customer_name);
+              //   var addre = v.customer_address;
+              //  alert(addre.match(','));
                if(v.receive_point == 1){
                  var rec_point = 'BKK';
                }
@@ -207,6 +210,15 @@ function show_det(){
               }
               else if(v.dropoff_status == 2){
                 var drop_status = 'Arrived';
+              }
+              if(v.customer_status == 0){
+                var cust_status = 'Not started';
+              }
+              else if(v.customer_status == 1){
+                var cust_status = 'On the Way';
+              }
+              else if(v.customer_status == 2){
+                var cust_status = 'Arrived';
               }
               if(v.way_status == 0){
                 var status = 'Pending';
@@ -256,17 +268,15 @@ function show_det(){
                                 <div class="col-9"> <span id="name">Total Charges</span> </div>
                                 <div class="col-3"> <span id="price">${v.total_charges}</span> </div>
                             </div>
+                            <div class="row">
+                                <div class="col-9"> <span id="name">Tracking_id</span> </div>
+                                <div class="col-3"> <span id="price">${v.tracking_id}</span> </div>
+                            </div>
                         </div>
                         <div class="tracking mt-2">
                             <div class="title">Tracking Order</div>
                         </div>
                         <div class="progress-track">
-                            <ul id="progressbar">
-                                <li class="step0 active " id="step1">Ordered</li>
-                                <li class="step0 active text-center" id="step2">Shipped</li>
-                                <li class="step0 active text-right" id="step3">On the way</li>
-                                <li class="step0 text-right" id="step4">Delivered</li>
-                            </ul>
                         </div>
                         <div class="pricing mt-2">
                             <strong id="name">Receive Point</strong>
@@ -296,9 +306,12 @@ function show_det(){
                             </div>
                         </div>
                         <div class="total">
+                            <strong id="name">Customer Point</strong>
                             <div class="row">
-                                <div class="col-md-5"> <span id="name">Customer Place</span> </div>
-                                <div class="col-md-7"> <span id="price">${v.customer_address}</span> </div>
+                                <div class="col-1"></div>
+                                <div class="col-3"><span class="border border-primary px-1" id="now">${v.customer_address}</span></div>
+                                <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
+                                <div class="col-4"><span class="border border-primary px-1" id="now">${v.customer_date}</span></div>
                             </div>
                         </div>
                         <div class="footer pricing">
@@ -307,6 +320,63 @@ function show_det(){
                             </div>
                         </div>
                     </div>`;
+
+                    if( v.receive_status == 0 && v.myawady_status != 2 && v.dropoff_status != 2 && v.customer_status !=2){
+                    htmlcard1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0 " id="step1">Ordered</li>
+                                <li class="step0 text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+
+                    else if( v.receive_status == 1 && v.myawady_status != 2 && v.dropoff_status != 2 && v.customer_status !=2){
+                    htmlcard1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0 active " id="step1">Ordered</li>
+                                <li class="step0 text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(v.receive_status == 1 && v.myawady_status == 2 && v.dropoff_status != 2 && v.customer_status !=2){
+                    htmlcard1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(v.receive_status == 1 && v.myawady_status == 2 && v.dropoff_status == 2 && v.customer_status !=2){
+                    htmlcard1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 active text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(v.receive_status == 1 && v.myawady_status == 2 && v.dropoff_status == 2 && v.customer_status ==2){
+                    htmlcard1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 active text-right" id="step3">On the way</li>
+                                <li class="step0 active text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
 
                 }
                 else{
@@ -324,13 +394,14 @@ function show_det(){
                 }
             });
             $('#det').html(htmlcard);
+            $('.progress-track').append(htmlcard1);
             $('#list').html(htmltable);
            }
     });
 }
 
 function detail_info(vall){
-  // 
+  //
   // alert(vall);
   $.ajax({
            type:'POST',
@@ -344,6 +415,7 @@ function detail_info(vall){
            success:function(data){
                 //  alert(data.customer_phone);
                 var htmldt = "";
+                var htmldt1 = "";
               if(data.receive_point == 1){
                  var rec_point = 'BKK';
                }
@@ -392,6 +464,15 @@ function detail_info(vall){
               else if(data.dropoff_status == 2){
                 var drop_status = 'Arrived';
               }
+              if(data.customer_status == 0){
+                var cust_status = 'Not started';
+              }
+              else if(data.customer_status == 1){
+                var cust_status = 'On the Way';
+              }
+              else if(data.customer_status == 2){
+                var cust_status = 'Arrived';
+              }
               $('#ph').hide();
 
                 htmldt += `<div class="card order ">
@@ -419,17 +500,16 @@ function detail_info(vall){
                                 <div class="col-9"> <span id="name">Total Charges</span> </div>
                                 <div class="col-3"> <span id="price">${data.total_charges}</span> </div>
                             </div>
+                            <div class="row">
+                                <div class="col-9"> <span id="name">Tracking Id</span> </div>
+                                <div class="col-3"> <span id="price">${data.tracking_id}</span> </div>
+                            </div>
                         </div>
                         <div class="tracking mt-2">
                             <div class="title">Tracking Order</div>
                         </div>
                         <div class="progress-track">
-                            <ul id="progressbar">
-                                <li class="step0 active " id="step1">Ordered</li>
-                                <li class="step0 active text-center" id="step2">Shipped</li>
-                                <li class="step0 active text-right" id="step3">On the way</li>
-                                <li class="step0 text-right" id="step4">Delivered</li>
-                            </ul>
+
                         </div>
                         <div class="pricing mt-2">
                             <strong id="name">Receive Point</strong>
@@ -459,9 +539,12 @@ function detail_info(vall){
                             </div>
                         </div>
                         <div class="total">
+                            <strong id="name">Customer Point</strong>
                             <div class="row">
-                                <div class="col-md-5"> <span id="name">Customer Place</span> </div>
-                                <div class="col-md-7"> <span id="price">${data.customer_address}</span> </div>
+                                <div class="col-1"></div>
+                                <div class="col-3"><span class="border border-primary px-1" id="now">${data.customer_address}</span></div>
+                                <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
+                                <div class="col-4"><span class="border border-primary px-1" id="now">${data.customer_date}</span></div>
                             </div>
                         </div>
                         <div class="footer pricing">
@@ -471,11 +554,69 @@ function detail_info(vall){
                         </div>
                     </div>`;
 
-              $('#det').html(htmldt); 
+                    if( data.receive_status == 0 && data.myawady_status != 2 && data.dropoff_status != 2 && data.customer_status !=2){
+                    htmldt1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0 " id="step1">Ordered</li>
+                                <li class="step0 text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+
+                    else if( data.receive_status == 1 && data.myawady_status != 2 && data.dropoff_status != 2 && data.customer_status !=2){
+                    htmldt1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0 active " id="step1">Ordered</li>
+                                <li class="step0 text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(data.receive_status == 1 && data.myawady_status == 2 && data.dropoff_status != 2 && data.customer_status !=2){
+                    htmldt1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(data.receive_status == 1 && data.myawady_status == 2 && data.dropoff_status == 2 && data.customer_status !=2){
+                    htmldt1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 active text-right" id="step3">On the way</li>
+                                <li class="step0 text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+                    else if(data.receive_status == 1 && data.myawady_status == 2 && data.dropoff_status == 2 && data.customer_status ==2){
+                    htmldt1 += `
+
+                            <ul id="progressbar">
+                                <li class="step0  active" id="step1">Ordered</li>
+                                <li class="step0 active text-center" id="step2">Shipped</li>
+                                <li class="step0 active text-right" id="step3">On the way</li>
+                                <li class="step0 active text-right" id="step4">Delivered</li>
+                            </ul>
+                                  `;
+                    }
+
+              $('#det').html(htmldt);
+              $('.progress-track').append(htmldt1);
            }
-           
+
       });
-      
+
 }
 
 // function hide_card(){

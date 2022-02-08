@@ -10,13 +10,13 @@
     <div class="col-md-7 col-4 align-self-center">
 
         <div class="d-flex m-t-8 justify-content-end">
-             <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#create_item">
+             <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#create_item" onclick="manager()">
                 <i class="fas fa-plus"></i>
                 Add Employee
             </a>
         </div>
 
-        <div class="modal fade" id="create_item" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="create_employee" role="dialog" aria-hidden="true" class="hhh">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -65,21 +65,24 @@
 
 
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label">Employee Role</label>
-                                            <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%" >
+                                        <div class="form-group" id="select_role">
+                                            {{-- <label class="control-label">Employee Role</label>
+                                            <input type="text" name="" id="opt" value="{{$ro_us}}">
+                                            <input type="text" name="" id="mng" value="{{$ro_us4}}">
+                                            <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%" onchange="manager()">
                                                 <option value="">Select</option>
-
-                                                @foreach ($roles as $rol)
+                                                <option value="4" class="manage">Manager</option>
+                                                <option value="5" class="operate">Operator</option> --}}
+                                                {{-- @foreach ($roles as $rol)
                                                 <option value="{{$rol->id}}">{{$rol->name}}</option>
-                                                @endforeach
+                                                @endforeach --}}
 
 
-                                            </select>
+                                            {{-- </select> --}}
                                         </div>
                                     </div>
-
-
+                                    <input type="hidden" name="" id="opt" value="{{$ro_us}}">
+                                     <input type="hidden" name="" id="mng" value="{{$ro_us4}}">
                                 </div>
 
 
@@ -131,4 +134,88 @@
 </table>
 
 
+@endsection
+
+@section('js')
+<script>
+function manager(){
+  var mng = $('#mng').val();
+  var opt = $('#opt').val();
+//   alert(mng);
+//   alert(opt);
+var htmlmo = "";
+if(mng == 2 && opt == 3){
+    $("#create_employee").modal('hide');
+htmlmo += `
+         <label class="control-label">Employee Role</label>
+                 <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%">
+                    <option value="">Select</option>
+                    <option value="4" class="manage" disabled>Manager</option>
+                    <option value="5" class="operate" disabled>Operator</option>
+
+               </select>
+          `;
+
+          swal({
+                    title: "Error Message",
+                    text: "No more Create Employee!!!",
+                    icon: "error",
+
+                });
+
+}
+else if(mng >= 2){
+    $("#create_employee").modal('show');
+htmlmo += `
+         <label class="control-label">Employee Role</label>
+                 <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%">
+                    <option value="">Select</option>
+                    <option value="4" class="manage" disabled>Manager</option>
+                    <option value="5" class="operate">Operator</option>
+
+               </select>
+          `;
+          swal({
+                    title: "Error Message",
+                    text: "No more Create Manager!!!But You can create Operator.",
+                    icon: "error",
+
+                });
+}
+else if(opt >= 3){
+    $("#create_employee").modal('show');
+htmlmo += `
+         <label class="control-label">Employee Role</label>
+                 <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%">
+                    <option value="">Select</option>
+                    <option value="4" class="manage">Manager</option>
+                    <option value="5" class="operate" disabled>Operator</option>
+
+               </select>
+          `;
+          swal({
+                    title: "Error Message",
+                    text: "No more Create Operator!!!But You can create Manager.",
+                    icon: "error",
+
+                });
+}
+
+else{
+    $("#create_employee").modal('show');
+    htmlmo += `
+         <label class="control-label">Employee Role</label>
+                 <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%">
+                    <option value="">Select</option>
+                    <option value="4" class="manage">Manager</option>
+                    <option value="5" class="operate">Operator</option>
+
+               </select>
+          `;
+}
+
+   $('#select_role').html(htmlmo);
+}
+
+</script>
 @endsection
