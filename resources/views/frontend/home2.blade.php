@@ -16,7 +16,7 @@
                       </div>
                     <!-- {{-- </form> --}} -->
                    </div>
-                   <h6 class="text-center mt-5" style="">Start tracking your parcel by entering your token or phone number in the box above.</h6>
+                   <h6 class="text-center mt-5" style="">Start tracking your parcel by entering your phone number in the box above.</h6>
 
                    <div id="det" class="mt-4">
 
@@ -251,8 +251,9 @@ function show_det(){
                         <div class="title">Purchase Reciept</div>
                         <div class="info">
                             <div class="row">
-                                <div class="col-7"> <span id="heading">Date</span><br> <span id="details">${v.customer_date}</span> </div>
-                                <div class="col-5 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${v.token}</span> </div>
+                                <div class="col-4"> <span id="heading">Date</span><br> <span id="details">${v.customer_date}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${v.token}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Tracking Id.</span><br> <span id="details">${v.tracking_id}</span> </div>
                             </div>
                         </div>
                         <div class="pricing">
@@ -268,16 +269,23 @@ function show_det(){
                                 <div class="col-9"> <span id="name">Parcel Quantity</span> </div>
                                 <div class="col-3"> <span id="price">${v.parcel_quantity}</span> </div>
                             </div>
-                            <div class="row">
+                            
+                        </div>
+                        <div class="total">
+                          <div class="row">
                                 <div class="col-9"> <span id="name">Total Charges</span> </div>
                                 <div class="col-3"> <span id="price">${v.total_charges}</span> </div>
                             </div>
 
+          
                             <div class="row">
-                                <div class="col-9"> <span id="name">Tracking_id</span> </div>
-                                <div class="col-3"> <span id="price">${v.tracking_id}</span> </div>
+                                <div class="col-9"> <span id="name">Per Kg Charges</span> </div>
+                                <div class="col-3"> <span id="price">${v.per_kg_charges}</span> </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-9"> <span id="name">Total Weight</span> </div>
+                                <div class="col-3"> <span id="price">${v.total_weight}</span> </div>
+                              </div>
                         </div>
                         <div class="tracking mt-2">
                             <div class="title">Tracking Order</div>
@@ -497,9 +505,10 @@ function detail_info(vall){
                 htmldt += `<div class="card order ">
                         <div class="title">Purchase Reciept</div>
                         <div class="info">
-                            <div class="row">
-                                <div class="col-7"> <span id="heading">Date</span><br> <span id="details">${data.customer_date}</span> </div>
-                                <div class="col-5 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${data.token}</span> </div>
+                          <div class="row">
+                                <div class="col-4"> <span id="heading">Date</span><br> <span id="details">${data.customer_date}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${data.token}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Tracking Id.</span><br> <span id="details">${data.tracking_id}</span> </div>
                             </div>
                         </div>
                         <div class="pricing">
@@ -515,16 +524,23 @@ function detail_info(vall){
                                 <div class="col-9"> <span id="name">Parcel Quantity</span> </div>
                                 <div class="col-3"> <span id="price">${data.parcel_quantity}</span> </div>
                             </div>
-                            <div class="row">
+                            
+                        </div>
+                        <div class="total">
+                          <div class="row">
                                 <div class="col-9"> <span id="name">Total Charges</span> </div>
                                 <div class="col-3"> <span id="price">${data.total_charges}</span> </div>
                             </div>
 
+          
                             <div class="row">
-                                <div class="col-9"> <span id="name">Tracking Id</span> </div>
-                                <div class="col-3"> <span id="price">${data.tracking_id}</span> </div>
+                                <div class="col-9"> <span id="name">Per Kg Charges</span> </div>
+                                <div class="col-3"> <span id="price">${data.per_kg_charges}</span> </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-9"> <span id="name">Total Weight</span> </div>
+                                <div class="col-3"> <span id="price">${data.total_weight}</span> </div>
+                              </div>
                         </div>
                         <div class="tracking mt-2">
                             <div class="title">Tracking Order</div>
@@ -532,6 +548,7 @@ function detail_info(vall){
                         <div class="progress-track">
 
                         </div>
+                
                         <div class="pricing mt-2">
                             <strong id="name">Receive Point</strong>
                             <div class="row">
