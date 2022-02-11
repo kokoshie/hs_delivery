@@ -107,6 +107,7 @@
                         <option value="2">Total Revenue</option>
                     </select>
                 </div>
+
                 <div class="col-md-4 mt-2 st_week" style="padding-left:50">
                     <label style="color:rgb(34, 190, 241)" class="pl-4 ml-2 pt-2 font-weight-bold  ">Status Weekly Filter</label>
                     <input type="week" name="receive_week" id="receive_week" class="border border-outline border-primary pl-3 pr-3 pt-2 pb-2 ml-1" style="border-radius: 7px;" onchange="getweek(this.value)">
@@ -115,13 +116,16 @@
                     <label style="color:rgb(34, 190, 241)" class="pl-4 ml-2 pt-2 font-weight-bold  ">Revenue Weekly Filter</label>
                     <input type="week" name="reve_week" id="reve_week" class="border border-outline border-primary pl-3 pr-3 pt-2 pb-2 ml-1" style="border-radius: 7px;" onchange="">
                 </div> -->
+
                 <div class="col-md-4 mt-2 st_month">
                     <label style="color:rgb(34, 190, 241)" class="pl-4 ml-3 pt-2 font-weight-bold  ">Status Month Filter</label>
                     <input type="month" name="receive_month" id="receive_month" class="border border-outline border-primary pl-3 pr-3 pt-2 pb-2" style="border-radius: 7px;" onchange="getmonth(this.value)">
                 </div>
                 <div class="col-md-4 mt-2 d-none re_month">
                     <label style="color:rgb(34, 190, 241)" class="pl-4 ml-3 pt-2 font-weight-bold  ">Revenue Month Filter</label>
+
                     <input type="month" name="reve_month" id="reve_month" class="border border-outline border-primary pl-3 pr-3 pt-2 pb-2" style="border-radius: 7px;" onchange="getrevenue_month(this.value)">
+
                 </div>
             </div>
             <div class="main">
@@ -211,7 +215,7 @@
     }
     function getweek(week)
     {
-        // alert(week);
+
         $.ajax({
            type:'POST',
            url:'/get_week',
@@ -223,6 +227,7 @@
             },
 
            success:function(data){
+
               var fdone = data.first_done;
               var fpend = data.first_pend;
               var freject = data.first_reject;
@@ -506,6 +511,7 @@
            }
         });
     }
+
     function getrevenue_month(month)
     {
         $.ajax({
@@ -616,6 +622,7 @@
         });
     }
 
+
 $(document).ready(function(){
     var way = @json($waylist);
     // $( "#re_month" ).addClass( 'd-none' );
@@ -649,7 +656,9 @@ var data = {
                 "#2097e1",
                 "#2097e1"
             ],
+
             data: [0,0,0,0]
+
         },
         {
             label: "Pending Status Qty",
@@ -663,7 +672,9 @@ var data = {
                 "#bdd9e6",
                 "#bdd9e6"
             ],
+
             data: [0,0,0,0]
+
         },
         {
             label: "Reject Status Qty",
@@ -677,7 +688,9 @@ var data = {
                 "#e4181e",
                 "#e4181e"
             ],
+
             data: [0,0,0,0]
+
         }
     ]
 };

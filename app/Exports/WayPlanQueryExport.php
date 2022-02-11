@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Exports;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithMapping;
 use App\WayPlanSchedule;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Maatwebsite\Excel\Concerns\ToModel;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
-use Maatwebsite\Excel\Concerns\FromArray;
+
+
 class WayPlanQueryExport implements FromCollection,WithHeadings
 {
     /**
@@ -26,6 +28,7 @@ class WayPlanQueryExport implements FromCollection,WithHeadings
         }
     public function collection()
     {
+
         // dd($this->status);
         if($this->status == 1)
         {
@@ -40,21 +43,31 @@ class WayPlanQueryExport implements FromCollection,WithHeadings
               {
                   $ws = "Pending";
               }
+              
               $arr_way[] = array(
-                'token'  => $wayy->token,
+                
                 'customer_name' => $wayy->customer_name,
-                'customer_phone' => $wayy->customer_phone,
-                'receive_point' => $wayy->receivelocation->name,
-                'receive_date' => $wayy->receive_date,
-                // 'dropoff_point' => $wayy->dropofflocation->name,
-                'dropoff_date' => $wayy->dropoff_date,
-                'tracking_id' => 1,
-                'remark' => $wayy->remark,
                 'parcel_quantity' => $wayy->parcel_quantity,
+                'tracking_no' => $wayy->tracking_no,
+                'receive_date' => $wayy->receive_date,
+                'receive_status' => $wayy->receive_status,
+                'myawady_date' => $wayy->myawady_date,
+                'myawady_status' => $wayy->myawady_status,
+                'dropoff_date' => $wayy->dropoff_date,
+                'dropoff_status' => $wayy->dropoff_status,
+                'dropoff_remark' => $wayy->dropoff_remark,
+                'customer_date' => $wayy->customer_date,
+                'customer_status' => $wayy->customer_status,
+                'customer_remark' => $wayy->customer_remark,
+                'token'  => $wayy->token,
                 'total_weight' => $wayy->total_weight,
-                'per_kg_charges' => $wayy->per_kg_charges,
-                'total_charges' => $wayy->total_charges,
-                'way_status' => $ws,
+                'cargo_charges' => $wayy->total_charges,
+                'customer_phone' => $wayy->customer_phone,
+                'reject_date' => $wayy->reject_date,
+                'reject_remark' => $wayy->reject_remark,
+                'point' => $wayy->receivelocation->name."-".$wayy->dropofflocation->name,
+                'location' => $wayy->customer_address,
+                
                );
              }
              return collect($arr_way);
@@ -66,6 +79,7 @@ class WayPlanQueryExport implements FromCollection,WithHeadings
             // dd($way); 
              foreach($way as $wayy)
              {
+                //  dd($wayy->dropoff_status);
               if($wayy->way_status == 1)
               {
                 $ws = "Done";
@@ -75,20 +89,27 @@ class WayPlanQueryExport implements FromCollection,WithHeadings
                   $ws = "Pending";
               }
               $arr_way[] = array(
-                'token'  => $wayy->token,
                 'customer_name' => $wayy->customer_name,
-                'customer_phone' => $wayy->customer_phone,
-                'receive_point' => $wayy->receivelocation->name."-".$wayy->dropofflocation->name,
-                'receive_date' => $wayy->receive_date,
-                // 'dropoff_point' => $wayy->dropofflocation->name,
-                'dropoff_date' => $wayy->dropoff_date,
-                'tracking_id' => 1,
-                'remark' => $wayy->remark,
                 'parcel_quantity' => $wayy->parcel_quantity,
+                'tracking_no' => $wayy->tracking_no,
+                'receive_date' => $wayy->receive_date,
+                'receive_status' => $wayy->receive_status,
+                'myawady_date' => $wayy->myawady_date,
+                'myawady_status' => $wayy->myawady_status,
+                'dropoff_date' => $wayy->dropoff_date,
+                'dropoff_status' => $wayy->dropoff_status,
+                'dropoff_remark' => $wayy->dropoff_remark,
+                'customer_date' => $wayy->customer_date,
+                'customer_status' => $wayy->customer_status,
+                'customer_remark' => $wayy->customer_remark,
+                'token'  => $wayy->token,
                 'total_weight' => $wayy->total_weight,
-                'per_kg_charges' => $wayy->per_kg_charges,
-                'total_charges' => $wayy->total_charges,
-                'way_status' => $ws,
+                'cargo_charges' => $wayy->total_charges,
+                'customer_phone' => $wayy->customer_phone,
+                'reject_date' => $wayy->reject_date,
+                'reject_remark' => $wayy->reject_remark,
+                'point' => $wayy->receivelocation->name."-".$wayy->dropofflocation->name,
+                'location' => $wayy->customer_address,
                );
              }
              return collect($arr_way);
@@ -112,44 +133,62 @@ class WayPlanQueryExport implements FromCollection,WithHeadings
                   $ws = "Reject";
               }
               $arr_way[] = array(
-                'token'  => $wayy->token,
                 'customer_name' => $wayy->customer_name,
-                'customer_phone' => $wayy->customer_phone,
-                'receive_point' => $wayy->receivelocation->name,
-                'receive_date' => $wayy->receive_date,
-                // 'dropoff_point' => $wayy->dropofflocation->name,
-                'dropoff_date' => $wayy->dropoff_date,
-                'tracking_id' => 1,
-                'remark' => $wayy->remark,
                 'parcel_quantity' => $wayy->parcel_quantity,
+                'tracking_no' => $wayy->tracking_no,
+                'receive_date' => $wayy->receive_date,
+                'receive_status' => $wayy->receive_status,
+                'myawady_date' => $wayy->myawady_date,
+                'myawady_status' => $wayy->myawady_status,
+                'dropoff_date' => $wayy->dropoff_date,
+                'dropoff_status' => $wayy->dropoff_status,
+                'dropoff_remark' => $wayy->dropoff_remark,
+                'customer_date' => $wayy->customer_date,
+                'customer_status' => $wayy->customer_status,
+                'customer_remark' => $wayy->customer_remark,
+                'token'  => $wayy->token,
                 'total_weight' => $wayy->total_weight,
-                'per_kg_charges' => $wayy->per_kg_charges,
-                'total_charges' => $wayy->total_charges,
-                'way_status' => $ws,
+                'cargo_charges' => $wayy->total_charges,
+                'customer_phone' => $wayy->customer_phone,
+                'reject_date' => $wayy->reject_date,
+                'reject_remark' => $wayy->reject_remark,
+                'point' => $wayy->receivelocation->name."-".$wayy->dropofflocation->name,
+                'location' => $wayy->customer_address,
+
                );
              }
              return collect($arr_way);
         }
+
         
     }
     
     public function headings(): array
     {
-        return [    
-            'token',
-            'customer_name',
-            'customer_phone',
-            'point',
-            'receive_date',
-            'dropoff_date',
-            'tracking_id',
-            'remark',
-            'parcel_quantity',
-            'total_weight',
-            'per_kg_charges',
-            'total_charges',
-            'way_status',
 
+        return [    
+            'customer_name',
+            'qty',
+            'tracking_number',
+            'bkk_arrived_date',
+            'receive_status',
+            'myawady_arrived_date',
+            'myawady_status',
+            'dropoff_arrived_date',
+            'dropoff_status',
+            'dropoff_remark',
+            'customer_arrived_date',
+            'customer_status',
+            'customer_remark',
+            'token',
+            'weight',
+            'cargo_charges',
+            'phone_no',
+            'reject_date',
+            'reject_remark',
+            'point',
+            'location',
+            'type',
         ];
     }
 }

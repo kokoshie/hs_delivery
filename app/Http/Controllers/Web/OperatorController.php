@@ -280,6 +280,7 @@ class OperatorController extends Controller
 		$five_day = Carbon::parse($four_day)->addDays(1)->format('Y-m-d');
 		$six_day = Carbon::parse($five_day)->addDays(1)->format('Y-m-d');
 		$seven_day = Carbon::parse($six_day)->addDays(1)->format('Y-m-d');
+
 // dd($weekStartDate."---".$two_day."---".$three_day."---".$four_day."---".$five_day."---".$six_day."---".$seven_day);
 		// dd($weekStartDate."---".$weekEndDate);
 		$first_status = WayPlanSchedule::where('receive_date',$weekStartDate)->get();
@@ -446,6 +447,7 @@ class OperatorController extends Controller
 		'last_reject' => count($last_reject_count ),
 			
 		]);
+
 	}
 	protected function change_barchart(Request $request)
 	{
@@ -558,6 +560,7 @@ class OperatorController extends Controller
 		]);
 		
 	}
+
 	protected function change_revenue_monthly(Request $request)
 	{
 		$date = $request->receive_revenue_month;
@@ -610,6 +613,7 @@ class OperatorController extends Controller
 			"last" => $last_total,
 		]);
 	}
+
 	protected function show_updateCharges($id)
 	{
 		// dd($id);
@@ -712,6 +716,9 @@ class OperatorController extends Controller
 			"chargess" => "required",
 			"customer_name" => "required",
 			"token" => "required",
+
+			"tracking_id" => "required",
+
 			"customer_phone" => "required",
 			"cust_addr" => "required",
 			"remark" => "required",
@@ -732,7 +739,9 @@ class OperatorController extends Controller
 			return redirect()->back();
 		}
 		$store_wayplan = WayPlanSchedule::find($request->wayid);
-		// dd($store_wayplan);
+
+		// dd($request->tracking_id);
+
 		$store_wayplan->customer_name =$request->customer_name;
 		$store_wayplan->customer_phone =$request->customer_phone;
 		$store_wayplan->receive_point =$request->receive_point;
@@ -740,6 +749,9 @@ class OperatorController extends Controller
 		$store_wayplan->dropoff_point =$request->drop_point;
 		$store_wayplan->dropoff_date = $request->drop_date;
 		$store_wayplan->remark =$request->remark;
+
+		$store_wayplan->tracking_no =$request->tracking_id;
+
 		$store_wayplan->parcel_quantity =$request->qty;
 		$store_wayplan->total_weight =$request->weight;
 		$store_wayplan->per_kg_charges =$request->perKg;
@@ -811,6 +823,8 @@ class OperatorController extends Controller
 		$store_way_status->customer_date = $request->custh_date;
 		$store_way_status->customer_status = $request->custh_status;
 		$store_way_status->way_status = $way_status;
+		$store_way_status->dropoff_remark = $request->dremark;
+		$store_way_status->customer_remark = $request->cremark;
 		$store_way_status->save();
 		alert()->success("Successfully changes All Status !!");
 		return back();

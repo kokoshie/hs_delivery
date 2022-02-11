@@ -16,7 +16,7 @@ class WayPlanSchedule extends Model
         'dropoff_point',
         'dropoff_address',
         'dropoff_date',
-        'tracking_id',
+        
         'remark',
         'parcel_quantity',
         'total_weight',
@@ -41,6 +41,7 @@ class WayPlanSchedule extends Model
         'reject_status',
         'reject_date',
         'register_date',
+        'tracking_no'
             ];
             public function receivelocation() {
                 return $this->belongsTo('App\Location','receive_point');

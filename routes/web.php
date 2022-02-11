@@ -112,8 +112,10 @@ Route::group(['middleware' => ['UserAuth']], function () {
 	Route::get('admin_das', 'Web\OperatorController@show_admin');
 	Route::post('get_month', 'Web\OperatorController@change_barchart')->name('get_month');
 	Route::post('get_week', 'Web\OperatorController@change_barchart_week')->name('get_week');
+
 	Route::post('get_revenue_month', 'Web\OperatorController@change_revenue_monthly')->name('get_revenue_month');
 	
+
 	
 
 
@@ -139,7 +141,7 @@ Route::group(['middleware' => ['UserAuth']], function () {
 	
 
     Route::post('way_import','ExcelWayPlanImportController@store_wayexcel_import')->name('way_import');
-	Route::post('way_export','ExcelWayPlanExportController@wayexcel_export')->name('way_export');
+	Route::get('way_export','ExcelWayPlanExportController@wayexcel_export')->name('way_export');
 	Route::post('way_export_query','ExcelWayPlanExportController@wayexcel_export_query')->name('way_export_query');
 	
 

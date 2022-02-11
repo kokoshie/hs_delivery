@@ -1,12 +1,12 @@
 @extends('master')
 @section('title', 'Dashboard')
 @section('content')
-
-<select class="" aria-label=".form-select-lg example" id="way" onchange="way_schedule(this.value)">
+<h4 class="text-center text-info font-weight-bold mb-3">Customer Order (WayPlan) Registration </h4>
+<!-- <select class="" aria-label=".form-select-lg example" id="way" onchange="way_schedule(this.value)">
     <option value="1" selected>Way Plan Schedule</option>
     <option value="2">Way Plan Assign</option>
 
-</select>
+</select> -->
 <div class="card mr-5"  id="schedule">
 <div class="card-body">
 <div class="container mt-2">
@@ -67,7 +67,9 @@
            </div>
         </div>
         <div class="col-md-6">
-           <div class="row mt-3">
+
+           <div class="row mt-2">
+
             <div class="col-md-5">
                 <h5 style="color:rgb(34, 190, 241)" class="p-4 mt-2 ml-5">Remark</h5>
              </div>
@@ -76,6 +78,16 @@
                  <textarea name="remark" id="" cols="40" rows="5" class="border border-outline border-primary" style="border-radius: 7px;"></textarea>
              </div>
            </div>
+
+           <div class="row mt-4">
+            <div class="col-md-5">
+               <h5 style="color:rgb(34, 190, 241)" class="p-4 ml-4">Tracking No</h5>
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="tracking_id" class="border border-outline border-primary" style="border-radius: 7px;">
+            </div>
+             </div>
+
        </div>
    </div>
 

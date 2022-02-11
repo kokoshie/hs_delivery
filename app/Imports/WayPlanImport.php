@@ -25,21 +25,62 @@ class WayPlanImport implements ToModel,WithHeadingRow
         }
     public function model(array $row)
     {
+        $receive_type = gettype($row['bkk_arrived_date']);
+        $mya_type = gettype($row['myawady_arrived_date']);
+        $drop_type = gettype($row['dropoff_arrived_date']);
+        $cust_type = gettype($row['customer_arrived_date']);
+        $reject_type = gettype($row['reject_date']);
 
-        $receive_date = $this->transformDate($row['bkk_arrived_date']);
-        $receiveD = date('Y-m-d', strtotime($receive_date));
-
-        $mya_date = $this->transformDate($row['myawady_arrived_date']);
-        $myaD = date('Y-m-d', strtotime($mya_date));
-
-        $drop_date = $this->transformDate($row['dropoff_arrived_date']);
-        $dropD = date('Y-m-d', strtotime($drop_date));
-
-        $cust_date = $this->transformDate($row['customer_arrived_date']);
-        $custD = date('Y-m-d', strtotime($cust_date));
-
-        $reject_date = $this->transformDate($row['reject_date']);
-        $rejectD = date('Y-m-d', strtotime($reject_date));
+        
+        if($receive_type === 'string')
+        {
+            // dd("Stringgg");
+            $receiveD = $row['bkk_arrived_date'];
+        }
+        else
+        {
+            $receive_date = $this->transformDate($row['bkk_arrived_date']);
+            $receiveD = date('Y-m-d', strtotime($receive_date));
+        }
+        if($mya_type === 'string')
+        {
+            $myaD = $row['myawady_arrived_date'];
+        }
+        else
+        {
+            $mya_date = $this->transformDate($row['myawady_arrived_date']);
+            $myaD = date('Y-m-d', strtotime($mya_date));
+        }
+        if($drop_type === 'string')
+        {
+            $dropD = $row['dropoff_arrived_date'];
+        }
+        else
+        {
+            $drop_date = $this->transformDate($row['dropoff_arrived_date']);
+            $dropD = date('Y-m-d', strtotime($drop_date));
+        }
+        if($cust_type === 'string')
+        {
+            $custD = $row['customer_arrived_date'];
+        }
+        else
+        {
+            $cust_date = $this->transformDate($row['customer_arrived_date']);
+            $custD = date('Y-m-d', strtotime($cust_date));
+        }
+        if($reject_type === 'string')
+        {
+            $rejectD = $row['reject_date'];
+        }
+        else
+        {
+            $reject_date = $this->transformDate($row['reject_date']);
+            $rejectD = date('Y-m-d', strtotime($reject_date));
+        }
+        
+        
+        
 
         
         $str_point = JSON_encode($row['point']);
@@ -57,6 +98,7 @@ class WayPlanImport implements ToModel,WithHeadingRow
             $end_point_str = substr($row['point'],4,3);
         }
         // dd($start_point_str."---".$end_point_str);
+
         if($start_point_str == "BKK")
         {
             $receive_point = 1;
@@ -128,12 +170,15 @@ class WayPlanImport implements ToModel,WithHeadingRow
         'token' => $row['token'],
         'way_status' => $waystatus,
         'customer_address' => $row['location'],
-
+        'tracking_no' => $row['tracking_number'],
+        'dropoff_remark' => $row['dropoff_remark'],
+        'customer_remark' => $row['customer_remark'],
         ]);
         // dd($waylist);
         $waylist->save();
         return $waylist;
         }
+
         else if($hasway != null && $row['type'] == "new")
         {
             $hasway->customer_name = $row['customer_name'];
@@ -161,12 +206,14 @@ class WayPlanImport implements ToModel,WithHeadingRow
             $hasway->save();
             return $hasway;
         }
+
         else if($hasway != null && $row['type'] == "update")
         {
             // dd($receive_point);
-
+            // dd("hel");
             // dd($receive_point);
             $hasway->customer_name = $row['customer_name'];
+           
             $hasway->customer_phone = (int)$row['phone_no'];
             $hasway->receive_point = $receive_point;
             $hasway->receive_date = $receiveD;

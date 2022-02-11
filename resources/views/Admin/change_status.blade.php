@@ -5,7 +5,8 @@
 <h4 class="text-info text-center">Change Way Plan Status</h4>
 <h5><i>Token</i>&nbsp;&nbsp;&nbsp;:<span class="font-weigth-bold text-info ml-3"><i>{{$wayplan->token}}</i></span></h5></br>
 <h5><i>Customer Name</i>&nbsp;&nbsp;&nbsp;:<span class="font-weigth-bold text-info ml-3"><i>{{$wayplan->customer_name}}</i></span></h5></br>
-<h5><i>Customer Phone</i>&nbsp;&nbsp;&nbsp;:<span class="font-weigth-bold text-info ml-3"><i>{{$wayplan->customer_phone}}</i></span></h5>
+<h5><i>Customer Phone</i>&nbsp;&nbsp;&nbsp;:<span class="font-weigth-bold text-info ml-3"><i>{{$wayplan->customer_phone}}</i></span></h5></br>
+<h5><i>Track Number</i>&nbsp;&nbsp;&nbsp;:<span class="font-weigth-bold text-info ml-3"><i>{{$wayplan->tracking_no}}</i></span></h5>
 <form action="{{route('store_changes_status')}}" method="post" id="storeform">
     @csrf
     <input type="hidden" name="wayplan_id" value="{{$wayplan->id}}">
@@ -17,12 +18,14 @@
     <input type="hidden" name="custh_status" id="custh_status">
     <input type="hidden" name="dropoffh_date" id="dropoffh_date">
     <input type="hidden" name="dropoffh_status" id="dropoffh_status">
+    <input type="hidden" name="cremark" id="cremark">
+    <input type="hidden" name="dremark" id="dremark">
 </form>
 <div class="row mt-5">
     <div class="col-md-6">
 <!-- Receive  -->
 <h5 class=""><span class="font-weght-bold" style="font-size:20px;">1.</span>Receive Point</span></h5>
-        <span class="custom-badge  status-blue">
+        <span class="custom-badge  status-blue" style="width:540px">
             <h4 class="text-center"><span class="badge badge-info">{{$re_point->name}}</span></h4>
             <div class="col-md-6">
             <div class="row">
@@ -60,7 +63,7 @@
     <div class="col-md-6">
         <!-- Myawady -->
         <h5 class=""><span class="font-weght-bold" style="font-size:20px;">2.</span>Mya-Wady Point</h5>
-        <span class="custom-badge  status-blue">
+        <span class="custom-badge  status-blue" style="width:510px">
             @if($wayplan->receive_status == 1)
             <h4 class="text-center"><span id="on_mya"><span class="badge badge-info">Mya-Wady Point</span></span></h4>
             @else
@@ -108,10 +111,10 @@
 </div>
 <!-- Next  -->
 <div class="row mt-5">
-    <div class="col-md-6" style="padding-left:30px;">
+    <div class="col-md-6" style="padding-left:60px;">
 <!-- DropOff -->
 <h5 class=""><span class="font-weght-bold" style="font-size:20px;">3.</span>DropOff Point</h5>
-        <span class="custom-badge  status-blue">
+        <span class="custom-badge  status-blue pl-3">
             @if($wayplan->myawady_status == 2)
 
             <h4 class="text-center"><span class="badge badge-info">{{$drop_point->name}}</span></h4>
@@ -125,7 +128,14 @@
                     <h5 style="color:rgb(34, 190, 241)" class="pl-4 ml-3 pt-2">Date</h5>
                 </div>
                 <div class="col-md-6">
-                <input type="date" name="dropoff_date" id="dropoff_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="{{$wayplan->receive_date}}">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="date" name="dropoff_date" id="dropoff_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="{{$wayplan->receive_date}}">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-sm btn-warning p-2" style="margin-left:150;border-radius: 7px;" onclick="drop_remark()">Remark</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             </div>
@@ -154,16 +164,24 @@
                 </div>
             </div>
             </div>
-            {{-- <div class="col-md-6" id="dropoff_remark">
-                <button type="button" id="dropremark" class="btn btn-warning" style="margin-left:180px;" onclick="drop_remark()" disabled>Remark</button>
-            </div> --}}
+             <div class="col-md-6 d-none" id="dropoff_area">
+                <!-- <button type="button" id="dropremark" class="btn btn-warning" style="margin-left:180px;" onclick="drop_remark()" disabled>Remark</button> -->
+                <div class="row mb-2">
+                    <div class="col-md-5">
+                        <h5 style="color:rgb(34, 190, 241);margin-top:20px;" class="pl-4 ml-3 pt-2 mr-3">Remark</h5>
+                    </div>
+                    <div class="col-md-6">
+                    <textarea name="remark" id="dropremark" cols="50" rows="3" class="border border-outline border-primary" style="border-radius: 7px;">{{$wayplan->dropoff_remark}}</textarea>
+                    </div>
+                </div>
+            </div> 
         </span>
 <!-- End Receive -->
     </div>
     <div class="col-md-6">
-        <!-- Myawady -->
+        <!-- Customer -->
         <h5 class=""><span class="font-weght-bold" style="font-size:20px;">4.</span>Customer Point</h5>
-        <span class="custom-badge  status-blue">
+        <span class="custom-badge  status-blue" style="width:510px">
             @if($wayplan->dropoff_status == 2)
             <h4 class="text-center"><span id="on_cust"><span class="badge badge-info">Customer Place</span></span></h4>
             @else
@@ -175,7 +193,14 @@
                     <h5 style="color:rgb(34, 190, 241)" class="pl-4 ml-3 pt-2">Date</h5>
                 </div>
                 <div class="col-md-6">
-                <input type="date" name="cust_date" id="cust_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="{{$wayplan->customer_date}}" onchange="count_change()">
+                    <div class="row">
+                            <div class="col-md-8">
+                                <input type="date" name="cust_date" id="cust_date" class="border border-outline border-primary pl-5 pr-5 pt-2 pb-2" style="border-radius: 7px;" value="{{$wayplan->customer_date}}" onchange="count_change()">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-warning p-2" style="margin-left:150;border-radius: 7px;" onclick="cust_remark()">Remark</button>
+                            </div>
+                    </div>
                 </div>
             </div>
             </div>
@@ -204,9 +229,17 @@
                 </div>
             </div>
             </div>
-            {{-- <div class="col-md-6" id="customer_remark">
-                <button type="button" id="custremark" class="btn btn-warning" style="margin-left:180px;" onclick="cust_remark()" disabled>Remark</button>
-            </div> --}}
+             <div class="col-md-6 d-none" id="customer_remark">
+                <!-- <button type="button" id="custremark" class="btn btn-warning" style="margin-left:180px;" onclick="cust_remark()" disabled>Remark</button> -->
+                <div class="row mb-2">
+                    <div class="col-md-5">
+                        <h5 style="color:rgb(34, 190, 241);margin-top:20px;" class="pl-4 ml-3 pt-2 mr-3">Remark</h5>
+                    </div>
+                    <div class="col-md-6">
+                    <textarea name="remark" id="custremark" cols="50" rows="3" class="border border-outline border-primary" style="border-radius: 7px;">{{$wayplan->customer_remark}}</textarea>
+                    </div>
+                </div>
+            </div> 
         </span>
 
         <!-- End Myawady -->
@@ -225,6 +258,7 @@
 @section('js')
 <script>
     $(document).ready(function(){
+        
         $('#on_drop_yes').hide();
         var pre_status = @json($wayplan);
         if(pre_status.receive_status == 1)
@@ -422,35 +456,39 @@ function mya_remark()
     `;
     $('#myawady_remark').html(htmlre);
 }
+// $("#dbutton").click(function(){
+//   $("#dropoff_area").toggle();
+// });
 function drop_remark()
 {
-    var htmlre = "";
-    htmlre +=`
-    <div class="row mb-2">
-        <div class="col-md-5">
-            <h5 style="color:rgb(34, 190, 241);margin-top:20px;" class="pl-4 ml-3 pt-2 mr-3">Remark</h5>
-        </div>
-        <div class="col-md-6">
-        <textarea name="remark" id="" cols="50" rows="3" class="border border-outline border-primary" style="border-radius: 7px;"></textarea>
-        </div>
-    </div>
-    `;
-    $('#dropoff_remark').html(htmlre);
+    
+    if($('#dropoff_area').css('display') == 'none')
+    {
+        // alert("none");
+        $("#dropoff_area").removeClass('d-none');
+    }
+    else
+    {
+        // alert("not");
+        
+        $( "#dropoff_area" ).addClass( 'd-none' );
+    }
+
+    
 }
 function cust_remark()
 {
-    var htmlre = "";
-    htmlre +=`
-    <div class="row mb-2">
-        <div class="col-md-5">
-            <h5 style="color:rgb(34, 190, 241);margin-top:20px;" class="pl-4 ml-3 pt-2 mr-3">Remark</h5>
-        </div>
-        <div class="col-md-6">
-        <textarea name="remark" id="" cols="50" rows="3" class="border border-outline border-primary" style="border-radius: 7px;"></textarea>
-        </div>
-    </div>
-    `;
-    $('#customer_remark').html(htmlre);
+    if($('#customer_remark').css('display') == 'none')
+    {
+        // alert("none");
+        $("#customer_remark").removeClass('d-none');
+    }
+    else
+    {
+        // alert("not");
+        
+        $( "#customer_remark" ).addClass( 'd-none' );
+    }
 }
 var count = 0;
 function count_change()
@@ -505,6 +543,8 @@ function test()
             $('#custh_status').val($('#cust_status').val());
             $('#dropoffh_date').val($('#dropoff_date').val());
             $('#dropoffh_status').val($('#dropoff_status').val());
+            $('#dremark').val($('#dropremark').val());
+            $('#cremark').val($('#custremark').val());
             $('#storeform').submit();
         }
     }
@@ -520,6 +560,8 @@ function test()
             $('#custh_status').val($('#cust_status').val());
             $('#dropoffh_date').val($('#dropoff_date').val());
             $('#dropoffh_status').val($('#dropoff_status').val());
+            $('#dremark').val($('#dropremark').val());
+            $('#cremark').val($('#custremark').val());
             $('#storeform').submit();
         }
     }
@@ -533,6 +575,8 @@ function test()
             $('#custh_status').val($('#cust_status').val());
             $('#dropoffh_date').val($('#dropoff_date').val());
             $('#dropoffh_status').val($('#dropoff_status').val());
+            $('#dremark').val($('#dropremark').val());
+            $('#cremark').val($('#custremark').val());
             $('#storeform').submit();
     }
 

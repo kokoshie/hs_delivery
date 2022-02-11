@@ -162,8 +162,10 @@ function show_det(){
             var htmltable = "";
             $.each(data.orders, function(i, v) {
                 // alert(v.customer_name);
-              //   var addre = v.customer_address;
-              //  alert(addre.match(','));
+
+                var addre = v.customer_address;
+               var re_addre = addre.split(",").pop();
+
 
                if(v.receive_point == 1){
                  var rec_point = 'BKK';
@@ -317,7 +319,9 @@ function show_det(){
                             <strong id="name">Customer Point</strong>
                             <div class="row">
                                 <div class="col-1"></div>
-                                <div class="col-3"><span class="border border-primary px-1" id="now">${v.customer_address}</span></div>
+
+                                <div class="col-3"><span class="border border-primary px-1" id="now">${re_addre}</span></div>
+
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${v.customer_date}</span></div>
 
@@ -489,6 +493,11 @@ function detail_info(vall){
                 var cust_status = 'Arrived';
               }
 
+               
+              var addre = data.customer_address;
+              var re_addre = addre.split(",").pop();
+
+
               $('#ph').hide();
 
                 htmldt += `<div class="card order ">
@@ -561,7 +570,9 @@ function detail_info(vall){
                             <strong id="name">Customer Point</strong>
                             <div class="row">
                                 <div class="col-1"></div>
-                                <div class="col-3"><span class="border border-primary px-1" id="now">${data.customer_address}</span></div>
+
+                                <div class="col-3"><span class="border border-primary px-1" id="now">${re_addre}</span></div>
+
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${data.customer_date}</span></div>
 

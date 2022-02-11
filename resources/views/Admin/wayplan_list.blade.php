@@ -18,13 +18,14 @@
     </form>
  
 
+
     <div class="col-md-3 mt-3" id="search_type">
         <select class="form-control rounded border border-primary" aria-label=".form-select-lg example" id="rout" onchange="select_type(this.value)">
             <option selected>Choose Search Type</option>
-            <option value="1">Route</option>
+            <!-- <option value="1">Route</option> -->
             <option value="2">Phone Number</option>
             <option value="3">Token</option>
-            <option value="4">Start Date</option>
+            <!-- <option value="4">Start Date</option> -->
         </select>
     </div>
     <div class="col-md-4" id="type_result" style="margin-top:17px;">
@@ -50,7 +51,8 @@
                 </form>
                 
                 <div class="col-md-6" style="margin-top:5px" id="replace_export">
-                <a href="{{route('way_export')}}" class="btn btn-success">Export</a>
+                <!-- <a href="{{route('way_export')}}" class="btn btn-success">Export</a> -->
+                <button class="btn btn-secondary" disabled>Export</button>
                 </div>
                 <!-- Begin Advance Search Modal -->
                 <div class="modal fade" id="advance_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -122,7 +124,7 @@
 
 </div>
 
-<div class="container mt-5">
+<div class="mt-5">
 <!-- <div class="offset-md-11">
     <button class="btn btn-info" onclick="searching()"><i class=" fas fa-search mr-2" style="color:#fff"></i>Search</button>
   </div> -->
@@ -131,10 +133,12 @@
         <tr>
           <th>No</th>
           <th>Customer</th>
+          <th>Receive Date</th>
           <th>Status</th>
           <th>Location</th>
           <th>Pak Qty</th>
           <th>Contact Number</th>
+          <th>Weight</th>
           <th>Total Charges</th>
           <th class="text-center">Action</th>
         </tr>
@@ -146,8 +150,9 @@
         <tr>
             <td>{{$i++}}.</td>
             <td><i class="far fa-user mr-2" style="size:7px"></i>{{$way->customer_name}}</td>
+            <td>{{$way->receive_date}}</td>
             @if($way->way_status == 0)
-            <td><span class="badge badge-light border border-danger mt-1 text-danger">Pending</span></td>
+            <td><span class="badge badge-light border border-danger mt-1  text-danger">Pending</span></td>
             @else
             <td><span class="badge badge-light border border-success mt-1 text-success">Done</span></td>
             @endif
@@ -169,7 +174,11 @@
             @elseif($way->myawady_status == 2 && $way->dropoff_status != 2 && $way->way_status != 1)
             <td>MyaWady</td>
             @elseif($way->dropoff_status == 2 && $way->customer_status != 2 && $way->way_status != 1)
-            <td>DropOff</td>
+            @foreach($location as $locat)
+            @if($locat->id == $way->dropoff_point)
+            <td>{{$locat->name}}</td>
+            @endif
+            @endforeach
             @elseif($way->way_status == 1)
             <td>{{$way->customer_address}}</td>
             @endif
@@ -178,11 +187,12 @@
             <td>&nbsp;&nbsp;&nbsp;{{$way->parcel_quantity}}</td>
 
             <td class="text-center">{{$way->customer_phone}}</td>
-
-            <td>{{$way->total_charges}}</td>
+            <td>{{$way->total_weight}}<span class="font-weight-bold">Kg</span></td>
+            <td class="text-center">{{$way->total_charges}}</td>
             <!-- <td><button href="{{route('way_change_status',$way->id)}}" type="button" class="btn btn-sm btn-danger"><i class="fas fa-ellipsis-h"></i>hello</button></td> -->
             <td><a href="{{route('way_change_status',$way->id)}}" class="btn btn-sm btn-primary">Change Status</a>
             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#reject_modal{{$way->id}}">Reject</button>
+            
           </td>
           </tr>
           <!-- Reject Modal -->
@@ -432,7 +442,9 @@ function searching()
                 htmlresult +=`
                 <tr>
             <td>${i+1}.</td>
-            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>`;
+            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>
+            <td>${v.receive_date}</td>
+            `;
             if(v.way_status == 0)
             {
             htmlresult +=`
@@ -477,6 +489,7 @@ function searching()
             htmlresult +=`
             <td>&nbsp;&nbsp;&nbsp;${v.parcel_quantity}</td>
             <td>${v.customer_phone}</td>
+            <td>${v.total_weight}</td>
             <td>${v.total_charges}</td>
 
             <td><a href="${url}" class="btn btn-sm btn-primary">Change Status</a>
@@ -530,7 +543,9 @@ function search_adv()
               htmlways +=`
                 <tr>
             <td>${i+1}.</td>
-            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>`;
+            <td><i class="far fa-user mr-2" style="size:7px"></i>${v.customer_name}</td>
+            <td>${v.receive_date}</td>
+            `;
             if(v.way_status == 0)
             {
             htmlways +=`
@@ -575,8 +590,9 @@ function search_adv()
             htmlways +=`
             <td>&nbsp;&nbsp;&nbsp;${v.parcel_quantity}</td>
             <td>${v.customer_phone}</td>
+            <td>${v.total_weight}</td>
             <td>${v.total_charges}</td>
-
+            
             <td><a href="${url}" class="btn btn-sm btn-primary">Change Status</a>
             <a href="" class="btn btn-sm btn-danger">Reject</a>
             </td>
