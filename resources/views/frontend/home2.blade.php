@@ -548,7 +548,7 @@ function detail_info(vall){
                         <div class="progress-track">
 
                         </div>
-                
+       
                         <div class="pricing mt-2">
                             <strong id="name">Receive Point</strong>
                             <div class="row">

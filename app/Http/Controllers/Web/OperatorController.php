@@ -4,21 +4,24 @@ namespace App\Http\Controllers\Web;
 
 use App\Day;
 
-use App\Role;
+use App\News;
 
+use App\Role;
 use App\Town;
 use App\User;
 use DateTime;
 use App\Admin;
 use App\State;
-use App\Doctor;
 
-use App\Location;
+use App\Doctor;
 use App\Booking;
+use App\Contact;
+use App\Package;
 use App\Patient;
+
 use App\Voucher;
 use App\Employee;
-
+use App\Location;
 use Carbon\Carbon;
 use App\Department;
 use App\DoctorInfo;
@@ -27,15 +30,14 @@ use App\Appointment;
 use App\Announcement;
 use App\Advertisement;
 use App\Traits\ZoomJWT;
-use Illuminate\Support\Facades\DB;
+use App\PackageKg_Price;
+use App\WayPlanSchedule;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Package;
-use App\PackageKg_Price;
-
-use App\WayPlanSchedule;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -239,6 +241,26 @@ class OperatorController extends Controller
 
         return redirect()->back();
     }
+
+	protected function delete_news($id){
+
+		// dd($id);
+
+	// $del = DB::table('news')->where('id',$id)->delete();
+	News::find($id)->delete();
+
+	return redirect()->back();
+}
+
+protected function delete_contact($id){
+
+	// dd($id);
+
+// $del = DB::table('news')->where('id',$id)->delete();
+Contact::find($id)->delete();
+
+return redirect()->back();
+}
 
     protected function update_employee($id){
 
@@ -553,6 +575,16 @@ dd($weekStartDate."---".$two_day."---".$three_day."---".$four_day."---".$five_da
 		return view('Admin.wayplan_list',compact('package','wayplan','location','ways'));
 
 	}
+
+	protected function news_list(Request $request){
+		$news = News::all();
+		return view('Admin.news_list',compact('news'));
+	}
+	protected function contact_list(Request $request){
+		$location = Location::all();
+		$contacts = Contact::all();
+		return view('Admin.contact_list',compact('location','contacts'));
+	}
 	protected function generate_token(Request $request)
 	{
 		// dd($request->wayplan_id);
@@ -826,6 +858,73 @@ dd($weekStartDate."---".$two_day."---".$three_day."---".$four_day."---".$five_da
         $location = Location::all();
         return view('Admin.charges',compact('location'));
     }
+
+	protected function store_news(Request $request){
+		// dd($request->img);
+		$validator = Validator::make($request->all(), [
+			'title' => 'required',
+			'description' => 'required',
+			'image' => 'required|file'
+		]);
+
+		if ($validator->fails()) {
+
+			alert()->error('Something Wrong');
+
+			return redirect()->back();
+		}
+		if($request->hasFile('img'))
+         {
+        $file = $request->file('img');
+        $originalname = $file->getClientOriginalName();
+        $filename =$originalname;
+        $file->move('public/images', $filename);
+          }
+		$title = $request->title;
+		// $img = $request->img;
+		$des = $request->des;
+
+		News::create([
+			'title' => $title,
+			'image' => $filename,
+			'description'  => $des
+		]);
+
+		alert()->success('Successfully Stored in News');
+
+		return back();
+	}
+
+	protected function store_contact(Request $request){
+		// dd($request->all());
+		// $validator = Validator::make($request->all(), [
+		// 	'location' => 'required',
+		// 	'address' => 'required',
+		// 	'phone_number' => 'required'
+		// ]);
+
+		// if ($validator->fails()) {
+
+		// 	alert()->error('Something Wrong');
+
+		// 	return redirect()->back();
+		// }
+		
+		$location = $request->locat;
+		// $img = $request->img;
+		$address = $request->address;
+		$phone = $request->phno;
+
+		Contact::create([
+			'location' => $location,
+			'address' => $address,
+			'phone_number'  => $phone
+		]);
+
+		alert()->success('Successfully Stored in Contacts');
+
+		return back();
+	}
 
 	protected function getBookingListUi()
 	{

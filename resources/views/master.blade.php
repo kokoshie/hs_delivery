@@ -291,6 +291,12 @@
                         <li>
                             <a href="{{route('employee_list')}}"><i class="bluecolor fas fa-users"></i><span>Employee List</span></a>
                         </li>
+                        <li>
+                            <a href="{{route('news_list')}}"><i class="bluecolor fas fa-users"></i><span>News List</span></a>
+                        </li>
+                        <li>
+                            <a href="{{route('contact_list')}}"><i class="bluecolor fas fa-users"></i><span>Contact List</span></a>
+                        </li>
                         {{-- <li>
                             <a href="{{route('doctor.onlinebookings')}}"><i class="pinkcolor fas fa-laptop-medical"></i><span>Online Booking</span></a>
                         </li>

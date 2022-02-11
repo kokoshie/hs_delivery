@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
-
+use App\Contact;
+use App\News;
 use App\Package;
 use App\PackageKg_Price;
 use App\WayPlanSchedule;
@@ -17,6 +18,8 @@ class FrontendController extends Controller
     {
 
          $packages = Package::all();
+         $contacts = Contact::all();
+         $news = News::all();
          $packageKg = PackageKg_Price::all();
         //   dd($packages->packageKg_prices);
 
@@ -26,13 +29,15 @@ class FrontendController extends Controller
         //     ->get();
         // dd($ans);
 
-        return view('frontend.home1',compact('packages','packageKg'));
+        return view('frontend.home1',compact('packages','packageKg','news','contacts'));
     }
     public function index1(Request $request)
     {
+        $news = News::all();
+        $contacts = Contact::all();
         $packages = Package::all();
         $packageKg = PackageKg_Price::all();
-        return view('frontend.home',compact('packages','packageKg'));
+        return view('frontend.home',compact('packages','packageKg','news','contacts'));
 
     }
     public function search_track()
