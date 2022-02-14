@@ -200,6 +200,8 @@ class WayPlanImport implements ToModel,WithHeadingRow
             $hasway->token = $row['token'];
             $hasway->way_status = $waystatus;
             $hasway->customer_address = $row['location'];
+            $hasway->customer_remark = $row['customer_remark'];
+            $hasway->dropoff_remark = $row['dropoff_remark'];
             $hasway->reject_status = 0;
             $hasway->reject_date = null;
             $hasway->reject_remark = null;
@@ -227,6 +229,8 @@ class WayPlanImport implements ToModel,WithHeadingRow
             $hasway->dropoff_status = (int)$row['dropoff_status'];
             $hasway->customer_status =(int)$row['customer_status'];
             $hasway->myawady_status = (int)$row['myawady_status'];
+            $hasway->customer_remark = $row['customer_remark'];
+            $hasway->dropoff_remark = $row['dropoff_remark'];
             $hasway->myawady_date = $myaD;
             $hasway->customer_date = $custD;
             $hasway->token = $row['token'];
@@ -256,6 +260,8 @@ class WayPlanImport implements ToModel,WithHeadingRow
                 'myawady_date' => $myaD,
                 'customer_date' => $custD,
                 'token' => $row['token'],
+                'dropoff_remark' => $row['dropoff_remark'],
+                'customer_remark' => $row['customer_remark'],
                 'way_status' => $waystatus,
                 'customer_address' => $row['location'],
                 'reject_date' => $rejectD,
@@ -287,6 +293,8 @@ class WayPlanImport implements ToModel,WithHeadingRow
             $hasway->token = $row['token'];
             $hasway->way_status = $waystatus;
             $hasway->customer_address = $row['location'];
+            $hasway->customer_remark = $row['customer_remark'];
+            $hasway->dropoff_remark = $row['dropoff_remark'];
             $hasway->reject_date = $rejectD;
             $hasway->reject_remark = $row['reject_remark'];
             $hasway->reject_status = 1;

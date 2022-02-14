@@ -4,21 +4,24 @@ namespace App\Http\Controllers\Web;
 
 use App\Day;
 
-use App\Role;
+use App\News;
 
+use App\Role;
 use App\Town;
 use App\User;
 use DateTime;
 use App\Admin;
 use App\State;
-use App\Doctor;
 
-use App\Location;
+use App\Doctor;
 use App\Booking;
+use App\Contact;
+use App\Package;
 use App\Patient;
+
 use App\Voucher;
 use App\Employee;
-
+use App\Location;
 use Carbon\Carbon;
 use App\Department;
 use App\DoctorInfo;
@@ -27,15 +30,14 @@ use App\Appointment;
 use App\Announcement;
 use App\Advertisement;
 use App\Traits\ZoomJWT;
-use Illuminate\Support\Facades\DB;
+use App\PackageKg_Price;
+use App\WayPlanSchedule;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Package;
-use App\PackageKg_Price;
-
-use App\WayPlanSchedule;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -239,6 +241,26 @@ class OperatorController extends Controller
 
         return redirect()->back();
     }
+
+	protected function delete_news($id){
+
+		// dd($id);
+
+	// $del = DB::table('news')->where('id',$id)->delete();
+	News::find($id)->delete();
+
+	return redirect()->back();
+}
+
+protected function delete_contact($id){
+
+	// dd($id);
+
+// $del = DB::table('news')->where('id',$id)->delete();
+Contact::find($id)->delete();
+
+return redirect()->back();
+}
 
     protected function update_employee($id){
 
@@ -738,30 +760,49 @@ class OperatorController extends Controller
 			alert()->error('Please Fill All Fields!');
 			return redirect()->back();
 		}
+		$store_wayplan = WayPlanSchedule::create([
+			'customer_name'=> $request->customer_name,
+			'customer_phone'=> $request->customer_phone,
+			'receive_point'=> $request->receive_point,
+			'receive_date'=> $request->receive_date,
+			'dropoff_point'=> $request->drop_point,
+			'dropoff_date'=> $request->drop_date,
+			'remark'=> $request->remark,
+			'parcel_quantity'=> $request->qty,
+			'total_weight'=> $request->weight,
+			'per_kg_charges'=> $request->perKg,
+			'package_id'=> $request->packageID,
+			'total_charges'=> $request->chargess,
+			'customer_address' => $request->cust_addr,
+			'myawady_date' => $date,
+			'customer_date' => $date,
+			'token' => $request->token,
+			'tracking_no' => $request->tracking_id,
+		]);
 		$store_wayplan = WayPlanSchedule::find($request->wayid);
 
 		// dd($request->tracking_id);
 
-		$store_wayplan->customer_name =$request->customer_name;
-		$store_wayplan->customer_phone =$request->customer_phone;
-		$store_wayplan->receive_point =$request->receive_point;
-		$store_wayplan->receive_date = $request->receive_date;
-		$store_wayplan->dropoff_point =$request->drop_point;
-		$store_wayplan->dropoff_date = $request->drop_date;
-		$store_wayplan->remark =$request->remark;
+		// $store_wayplan->customer_name =$request->customer_name;
+		// $store_wayplan->customer_phone =$request->customer_phone;
+		// $store_wayplan->receive_point =$request->receive_point;
+		// $store_wayplan->receive_date = $request->receive_date;
+		// $store_wayplan->dropoff_point =$request->drop_point;
+		// $store_wayplan->dropoff_date = $request->drop_date;
+		// $store_wayplan->remark =$request->remark;
 
-		$store_wayplan->tracking_no =$request->tracking_id;
+		// $store_wayplan->tracking_no =$request->tracking_id;
 
-		$store_wayplan->parcel_quantity =$request->qty;
-		$store_wayplan->total_weight =$request->weight;
-		$store_wayplan->per_kg_charges =$request->perKg;
-		$store_wayplan->package_id = $request->packageID;
-		$store_wayplan->total_charges = $request->chargess;
-		$store_wayplan->customer_address = $request->cust_addr;
-		$store_wayplan->myawady_date = $date;
-		$store_wayplan->customer_date = $date;
-		$store_wayplan->token =  $request->token;
-		$store_wayplan->save();
+		// $store_wayplan->parcel_quantity =$request->qty;
+		// $store_wayplan->total_weight =$request->weight;
+		// $store_wayplan->per_kg_charges =$request->perKg;
+		// $store_wayplan->package_id = $request->packageID;
+		// $store_wayplan->total_charges = $request->chargess;
+		// $store_wayplan->customer_address = $request->cust_addr;
+		// $store_wayplan->myawady_date = $date;
+		// $store_wayplan->customer_date = $date;
+		// $store_wayplan->token =  $request->token;
+		// $store_wayplan->save();
 		// dd($request->all());
 		alert()->success("Successfully Stored WayPlan Schedule!");
 		return back();
@@ -777,6 +818,16 @@ class OperatorController extends Controller
 		return view('Admin.wayplan_list',compact('package','wayplan','location','ways'));
 
 	}
+
+	protected function news_list(Request $request){
+		$news = News::all();
+		return view('Admin.news_list',compact('news'));
+	}
+	protected function contact_list(Request $request){
+		$location = Location::all();
+		$contacts = Contact::all();
+		return view('Admin.contact_list',compact('location','contacts'));
+	}
 	protected function generate_token(Request $request)
 	{
 		// dd($request->wayplan_id);
@@ -788,6 +839,7 @@ class OperatorController extends Controller
         $monthName = $date->format('F');
 		$three_str = substr($monthName,0,3);
 		$token = "T".$three_str.sprintf('%04s',$wayplanid->id);
+		$wayplanid->delete();
 		return response()->json([
 			'wayplan_id' => $wayplanid->id,
 			'token' => $token]);
@@ -1052,6 +1104,73 @@ class OperatorController extends Controller
         $location = Location::all();
         return view('Admin.charges',compact('location'));
     }
+
+	protected function store_news(Request $request){
+		// dd($request->img);
+		// $validator = Validator::make($request->all(), [
+		// 	'title' => 'required',
+		// 	'description' => 'required',
+		// 	'image' => 'required|file'
+		// ]);
+
+		// if ($validator->fails()) {
+
+		// 	alert()->error('Something Wrong');
+
+		// 	return redirect()->back();
+		// }
+		if($request->hasFile('img'))
+         {
+        $file = $request->file('img');
+        $originalname = $file->getClientOriginalName();
+        $filename =$originalname;
+        $file->move('public/images', $filename);
+          }
+		$title = $request->title;
+		// $img = $request->img;
+		$des = $request->des;
+
+		News::create([
+			'title' => $title,
+			'image' => $filename,
+			'description'  => $des
+		]);
+
+		alert()->success('Successfully Stored in News');
+
+		return back();
+	}
+
+	protected function store_contact(Request $request){
+		// dd($request->all());
+		// $validator = Validator::make($request->all(), [
+		// 	'location' => 'required',
+		// 	'address' => 'required',
+		// 	'phone_number' => 'required'
+		// ]);
+
+		// if ($validator->fails()) {
+
+		// 	alert()->error('Something Wrong');
+
+		// 	return redirect()->back();
+		// }
+		
+		$location = $request->locat;
+		// $img = $request->img;
+		$address = $request->address;
+		$phone = $request->phno;
+
+		Contact::create([
+			'location' => $location,
+			'address' => $address,
+			'phone_number'  => $phone
+		]);
+
+		alert()->success('Successfully Stored in Contacts');
+
+		return back();
+	}
 
 	protected function getBookingListUi()
 	{

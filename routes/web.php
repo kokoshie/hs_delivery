@@ -99,8 +99,14 @@ Route::group(['middleware' => ['UserAuth']], function () {
 	Route::get('AdminDashboard', 'Web\OperatorController@AdminDashboard')->name('admin_dashboard');
     Route::get('manager_dashboard', 'Web\OperatorController@manager_dashboard')->name('manager_dashboard');
 	Route::get('employee_list', 'Web\OperatorController@employee_list')->name('employee_list');
+	Route::get('news_list', 'Web\OperatorController@news_list')->name('news_list');
+	Route::get('contact_list', 'Web\OperatorController@contact_list')->name('contact_list');
+	Route::post('store_news', 'Web\OperatorController@store_news')->name('store_news');
+	Route::post('store_contact', 'Web\OperatorController@store_contact')->name('store_contact');
     Route::post('store_employee', 'Web\OperatorController@store_employee')->name('store_employee');
     Route::get('delete_employee/{id}', 'Web\OperatorController@delete_employee')->name('delete_employee');
+	Route::get('delete_news/{id}', 'Web\OperatorController@delete_news')->name('delete_news');
+	Route::get('delete_contact/{id}', 'Web\OperatorController@delete_contact')->name('delete_contact');
     Route::get('update_employee/{id}', 'Web\OperatorController@update_employee')->name('update_employee');
 
     //master data

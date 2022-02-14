@@ -51,8 +51,8 @@
                 </form>
                 
                 <div class="col-md-6" style="margin-top:5px" id="replace_export">
-                <!-- <a href="{{route('way_export')}}" class="btn btn-success">Export</a> -->
-                <button class="btn btn-secondary" disabled>Export</button>
+                <a href="{{route('way_export')}}" class="btn btn-success">Export</a>
+                <!-- <button class="btn btn-secondary" disabled>Export</button> -->
                 </div>
                 <!-- Begin Advance Search Modal -->
                 <div class="modal fade" id="advance_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

@@ -159,77 +159,107 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
     <!-- ============================================-->
 
      <!-- <section> begin ============================-->
-        <section class="pt-4 pt-md-6" id="features">
+      <section class="pt-4 pt-md-6" id="features">
 
-            <div class="container">
-              <div class="row">
-                <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt=""/></div>
-                <div class="col-md-7 col-lg-5 text-center text-md-start">
-                  <h4 class="" style="color: #ae17db"><u>Rules and Regulation fot HS Cargo Service</u></h4>
-                  <div class="d-flex mt-2">
-                    <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">I guarantee that I am the owner of the goods that will be transported.</p>
-                  </div>
-                  <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp ">I agree as a customer or recipient that HS cargo is not concerned with any illegal or unlawful goods whatsoever.</p>
-                  </div>
-                  <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">HS Cargo will not be responsible for the consequences of goods that are successfully received and signed by customer.</p>
-                  </div>
-                  <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">If there is any issue on the goods that didn't pay insurance fee, HS cargo will only compansate 10 times of the delivery fee.
-                        &nbsp;&nbsp;&nbsp;<a class="seemore" style="color:#1e0c24;" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target="#collapseExample" onclick="btnhide()">see more....</a>
-                    </p>
-                  </div>
+        <div class="container">
 
-                  <button class="button design seemore" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
-                  data-target="#imgModal"><span>See Document</span></button>
-                  <div class="collapse" id="collapseExample">
-                      <div class="d-flex mt-1">
-                        <i class="bluecolor fas fa-check"></i><p class="ms-2 ppp">Insurance fee is to provide a compensation for the loss or damage of expensive and valueable goods according to the original worth of the goods.Insurance fee is charged 5% of the good's price.</p>
-                      </div>
-                      <div class="d-flex mt-1">
-                        <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">I completely agree with the above terms and conditions as a customer or recipient.</p>
-                      </div>
-                      <button class="button design" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
-                       data-target="#imgModal"><span>See Document</span></button>
-                      <a href="#features" class="previous design1" onclick="close_coll()">&laquo; Previous</a>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt=""/></div>
+            <div class="col-md-7 col-lg-5 text-center text-md-start">
+              <h4 class="" style="color: #ae17db"><u>Rules and Regulation fot HS Cargo Service</u></h4>
+              <div class="d-flex mt-2">
+                <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">I guarantee that I am the owner of the goods that will be transported.</p>
+              </div>
+              <div class="d-flex mt-1">
+                <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp ">I agree as a customer or recipient that HS cargo is not concerned with any illegal or unlawful goods whatsoever.</p>
+              </div>
+              <div class="d-flex mt-1">
+                <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">HS Cargo will not be responsible for the consequences of goods that are successfully received and signed by customer.</p>
+              </div>
+              <div class="d-flex mt-1">
+                <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">If there is any issue on the goods that didn't pay insurance fee, HS cargo will only compansate 10 times of the delivery fee.
+                    &nbsp;&nbsp;&nbsp;<a class="seemore" style="color:#1e0c24;" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target="#collapseExample" onclick="btnhide()">see more....</a>
+                </p>
+              </div>
+              {{-- <button class="button design seemore" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target="#collapseExample" onclick="btnhide()"><span>See Detail </span></button> --}}
+              <button class="button design seemore" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
+              data-target="#imgModal"><span>See Document</span></button>
+              <div class="collapse" id="collapseExample">
+                  <div class="d-flex mt-1">
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2 ppp">Insurance fee is to provide a compensation for the loss or damage of expensive and valueable goods according to the original worth of the goods.Insurance fee is charged 5% of the good's price.</p>
                   </div>
-                </div>
+                  <div class="d-flex mt-1">
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">I completely agree with the above terms and conditions as a customer or recipient.</p>
+                  </div>
+                  <button class="button design" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
+                   data-target="#imgModal"><span>See Document</span></button>
+                  <a href="#features" class="previous design1" onclick="close_coll()">&laquo; Previous</a>
+
               </div>
             </div>
-
-            <div class="modal fade"
-            id="imgModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-           <div class="modal-dialog"
-                role="document">
-               <div class="modal-content">
-                   <!-- Modal heading -->
-                   {{-- <div class="modal-header">
-                       <h5 class="modal-title"
-                           id="exampleModalLabel">
-                         Rule and Regulations for HS Cargo's Customer
-                     </h5>
-                       <button type="button"
-                               class="close"
-                               data-dismiss="modal"
-                               aria-label="Close">
-                           <span aria-hidden="true">
-                             ×
-                         </span>
-                      </button>
-                  </div> --}}
-
-                  <!-- Modal body with image -->
-                  <div class="modal-body">
-                      <img src="{{asset('frontend/assets/img/pp2.jpg')}}" width="470"/>
+          </div>
+      
+          {{-- slide --}}
+                      </div>
+                     
+                        @foreach ($news as $n)
+                        <div class="carousel-item">
+                        <div class="row">
+                          <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="public/images/{{$n->image}}" alt=""/></div>
+                          <div class="col-md-7 col-lg-5 text-center text-md-start">
+                            <h4 class="" style="color: #ae17db"><u>{{$n->title}}</u></h4>
+                            <div class="d-flex mt-2">
+                              <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">{{$n->description}}</p>
+                            </div>
+                           
+                          </div>
+                        </div>
+                        </div>
+                        @endforeach
+          
                   </div>
+              </div>
+        </div>
+
+
+        <div class="modal fade"
+        id="imgModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+       <div class="modal-dialog"
+            role="document">
+           <div class="modal-content">
+               <!-- Modal heading -->
+               {{-- <div class="modal-header">
+                   <h5 class="modal-title"
+                       id="exampleModalLabel">
+                     Rule and Regulations for HS Cargo's Customer
+                 </h5>
+                   <button type="button"
+                           class="close"
+                           data-dismiss="modal"
+                           aria-label="Close">
+                       <span aria-hidden="true">
+                         ×
+                     </span>
+                  </button>
+              </div> --}}
+
+              <!-- Modal body with image -->
+              <div class="modal-body">
+                  <img src="{{asset('frontend/assets/img/pp2.jpg')}}" width="470"/>
               </div>
           </div>
       </div>
+  </div>
+        <!-- end of .container-->
+
+      </section>
             <!-- end of .container-->
 
           </section>
@@ -657,41 +687,78 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
           <div class="col-6 col-sm-4 col-lg-3 mb-3">
             <h5 class="lh-lg"> <span style="background-color:rgb(247, 132, 38);color:#fff "> &nbsp;&nbsp;&nbsp; Bangkok &nbsp;&nbsp;&nbsp;</span></h5>
             <ul class="list-unstyled mb-md-4 mb-lg-0">
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">2639 Soi Khiong Tan Mosque</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Ramkhhamhaeng Road,</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Suan Luang District,</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Bangkok 10250</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">+66-0951033920</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">+66-0888900358</span></a></li>
+              @foreach ($contacts as $c)
+              @if ($c->location == "BKK")
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">{{$c->address}}</span></a></li>
+              
+              @endif
+                
+              @endforeach
+              @foreach ($contacts as $c)
+              @if ($c->location == "BKK")
+              
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++{{$c->phone_number}}</span></a></li>
+              @endif
+                
+              @endforeach
+              
             </ul>
           </div>
           <div class="col-6 col-sm-4 col-lg-3 mb-3">
             <h5 class="lh-lg"><span style="background-color:rgb(247, 132, 38);color:#fff "> &nbsp;&nbsp;&nbsp; Maesot &nbsp;&nbsp;&nbsp;</span></h5>
             <ul class="list-unstyled mb-md-4 mb-lg-0">
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">No.637/3 moo 2 Soi 5</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Tha Sai Luat, Mae Sot District,</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Tak 63110.</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">About Us</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++66-0823992159</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++66-0873891314</span></a></li>
+              @foreach ($contacts as $c)
+              @if ($c->location == "MAESOT")
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">{{$c->address}}</span></a></li>
+              
+              @endif
+                
+              @endforeach
+              @foreach ($contacts as $c)
+              @if ($c->location == "MAESOT")
+              
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++{{$c->phone_number}}</span></a></li>
+              @endif
+                
+              @endforeach
             </ul>
           </div>
           <div class="col-12 col-sm-4 col-lg-3 mb-3 ps-xxl-7 ps-xl-5">
             <h5 class="lh-lg"><span style="background-color:rgb(247, 132, 38);color:#fff "> &nbsp;&nbsp;&nbsp; Yangon &nbsp;&nbsp;&nbsp;</span> </h5>
             <ul class="list-unstyled mb-md-4 mb-lg-0">
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">No(296), 7 road,</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Mingalardon Industry,</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">Zay Kabar.</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">09-796898989</span></a></li>
+              @foreach ($contacts as $c)
+              @if ($c->location == "YGN")
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">{{$c->address}}</span></a></li>
+              
+              @endif
+                
+              @endforeach
+              @foreach ($contacts as $c)
+              @if ($c->location == "YGN")
+              
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++{{$c->phone_number}}</span></a></li>
+              @endif
+                
+              @endforeach
             </ul>
           </div>
           <div class="col-12 col-sm-4 col-lg-3 mb-3 ps-xxl-7 ps-xl-5">
             <h5 class="lh-lg"><span style="background-color:rgb(247, 132, 38);color:#fff "> &nbsp;&nbsp;&nbsp; Myawaddy &nbsp;&nbsp;&nbsp;</span> </h5>
             <ul class="list-unstyled mb-md-4 mb-lg-0">
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">6/7 Taung Kalay Monasty Road.</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">09-454545154</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">09-796674535</span></a></li>
-              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">09-764482400</span></a></li>
+              @foreach ($contacts as $c)
+              @if ($c->location == "MYAWADY")
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">{{$c->address}}</span></a></li>
+              
+              @endif
+                
+              @endforeach
+              @foreach ($contacts as $c)
+              @if ($c->location == "MYAWADY")
+              
+              <li class="lh-lg"><a class="text-900 text-decoration-none" href="#!"><span style="font-style:italic;color:hsl(325, 64%, 50%)">++{{$c->phone_number}}</span></a></li>
+              @endif
+                
+              @endforeach
             </ul>
           </div>
           {{-- <hr class="opacity-25" /> --}}
