@@ -137,12 +137,103 @@
                 <td>{{$ruse->name}}</td>
                 <td>{{$user->phone}}</td>
                 <td class="text-center">
-                    <a href="{{route('update_employee',$user->id)}}" class="btn btn-sm btn-warning">Update</a>
+                    {{-- <a href="" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateModal">Update</a> --}}
                     <a href="{{route('delete_employee',$user->id)}}" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
             @endforeach
         @endforeach
+        <div class="modal fade" id="updateModal" role="dialog" aria-hidden="true">
+
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Employee Create Form</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form method="post" action="{{route('update_employee')}}" enctype='multipart/form-data'>
+                            @csrf
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                         <div class="form-group">
+                                            <label class="control-label">Employee Name</label>
+                                            <input type="text" name="name" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+
+                                            <input type="email" style="margin-top:9px" name="email" class="form-control" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Password</label>
+
+                                            <input type="password" style="margin-top:9px"  name="password" class="form-control" required>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Employee Phone</label>
+                                            <input type="text" name="phone" class="form-control" required>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="select_role">
+                                            {{-- <label class="control-label">Employee Role</label>
+                                            <input type="text" name="" id="opt" value="{{$ro_us}}">
+                                            <input type="text" name="" id="mng" value="{{$ro_us4}}">
+                                            <select class="form-control select2" style="margin-top:9px" name="role" style="width: 100%" onchange="manager()">
+                                                <option value="">Select</option>
+                                                <option value="4" class="manage">Manager</option>
+                                                <option value="5" class="operate">Operator</option> --}}
+                                                {{-- @foreach ($roles as $rol)
+                                                <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                                @endforeach --}}
+
+
+                                            </select> 
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="" id="opt" value="{{$ro_us}}">
+                                     <input type="hidden" name="" id="mng" value="{{$ro_us4}}">
+                                </div>
+
+
+                                    <div class="row">
+                                        <div class=" col-md-9">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </tbody>
 </table>
 
@@ -228,6 +319,11 @@ else{
 }
 
    $('#select_role').html(htmlmo);
+}
+
+function update_emp(){
+    // alert('hemmm');
+
 }
 
 </script>
