@@ -198,8 +198,10 @@ function show_det(){
             var htmltable = "";
             $.each(data.orders, function(i, v) {
                 // alert(v.customer_name);
+
                 var addre = v.customer_address;
                var re_addre = addre.split(",").pop();
+
 
                if(v.receive_point == 1){
                  var rec_point = 'BKK';
@@ -289,7 +291,7 @@ function show_det(){
                             <div class="row">
                                 <div class="col-4"> <span id="heading">Date</span><br> <span id="details">${v.customer_date}</span> </div>
                                 <div class="col-4 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${v.token}</span> </div>
-                                <div class="col-4 pull-right"> <span id="heading">Tracking Id.</span><br> <span id="details">${v.tracking_id}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Tracking No.</span><br> <span id="details">${v.tracking_no}</span> </div>
                             </div>
                         </div>
                         <div class="pricing">
@@ -314,10 +316,7 @@ function show_det(){
                             </div>
 
           
-                            <div class="row">
-                                <div class="col-9"> <span id="name">Per Kg Charges</span> </div>
-                                <div class="col-3"> <span id="price">${v.per_kg_charges}</span> </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-9"> <span id="name">Total Weight</span> </div>
                                 <div class="col-3"> <span id="price">${v.total_weight}</span> </div>
@@ -361,7 +360,9 @@ function show_det(){
                             <strong id="name">Customer Point</strong>
                             <div class="row">
                                 <div class="col-1"></div>
+
                                 <div class="col-3"><span class="border border-primary px-1" id="now">${re_addre}</span></div>
+
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${v.customer_date}</span></div>
 
@@ -532,9 +533,11 @@ function detail_info(vall){
               else if(data.customer_status == 2){
                 var cust_status = 'Arrived';
               }
+
                
               var addre = data.customer_address;
               var re_addre = addre.split(",").pop();
+
 
               $('#ph').hide();
 
@@ -544,7 +547,7 @@ function detail_info(vall){
                           <div class="row">
                                 <div class="col-4"> <span id="heading">Date</span><br> <span id="details">${data.customer_date}</span> </div>
                                 <div class="col-4 pull-right"> <span id="heading">Token No.</span><br> <span id="details">${data.token}</span> </div>
-                                <div class="col-4 pull-right"> <span id="heading">Tracking Id.</span><br> <span id="details">${data.tracking_id}</span> </div>
+                                <div class="col-4 pull-right"> <span id="heading">Tracking No.</span><br> <span id="details">${data.tracking_no}</span> </div>
                             </div>
                         </div>
                         <div class="pricing">
@@ -569,13 +572,10 @@ function detail_info(vall){
                             </div>
 
           
-                            <div class="row">
-                                <div class="col-9"> <span id="name">Per Kg Charges</span> </div>
-                                <div class="col-3"> <span id="price">${data.per_kg_charges}</span> </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-9"> <span id="name">Total Weight</span> </div>
-                                <div class="col-3"> <span id="price">${data.total_weight}</span> </div>
+                                <div class="col-3"> <span id="price">${data.total_weight}Kg</span> </div>
                               </div>
                         </div>
                         <div class="tracking mt-2">
@@ -617,7 +617,9 @@ function detail_info(vall){
                             <strong id="name">Customer Point</strong>
                             <div class="row">
                                 <div class="col-1"></div>
+
                                 <div class="col-3"><span class="border border-primary px-1" id="now">${re_addre}</span></div>
+
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${cust_status}</span></div>
                                 <div class="col-4"><span class="border border-primary px-1" id="now">${data.customer_date}</span></div>
 

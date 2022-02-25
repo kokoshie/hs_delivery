@@ -39,7 +39,7 @@
 
             <h5 class="fw-medium"><span style="background-color:#ae17db;color:#fff; " class="py-1 mb-2"> &nbsp;&nbsp; မိတ်ဆက် &nbsp;&nbsp;</span></h5>
 
-            <p class="mt-2 mb-4" style="font-style:italic;color:black;text-indent :5em;">
+            <p class="mt-2 mb-4" style="font-style:italic;color:black;text-indent :5em;font-size:22px;">
 
 HS Cargo သည် Hlwan Shwe La Min   Trading and Logistics  Company ၏ လုပ်ငန်းခွဲ တခုဖြစ်ပါသည် …
 
@@ -68,8 +68,14 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
               </div>
             </div>
             <div class="carousel-item">
-                <img class="" src="{{asset('frontend/assets/img/hspic2.jpg')}}" alt="Second slide" width="1108" height="538">
+                <img class="" src="{{asset('frontend/assets/img/pp1.jpg')}}" alt="Second slide" width="1480" height="600">
             </div>
+            <div class="carousel-item">
+              <img class="" src="{{asset('frontend/assets/img/pp3.jpg')}}" alt="Second slide" width="1480" height="600">
+          </div>
+          <div class="carousel-item">
+            <img class="" src="{{asset('frontend/assets/img/pp5.jpg')}}" alt="Second slide" width="1480" height="600">
+        </div>
 
 
           </div>
@@ -98,18 +104,18 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
               <div class="row">
                 <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{asset('frontend/assets/img/pic2.jpg')}}" alt=""/></div>
                 <div class="col-md-7 col-lg-5 text-center text-md-start">
-                  <h4 class="" style="color: #ae17db"><u>Rules and Regulation fot HS Cargo Service</u></h4>
+                  <h4 class="mt-5" style="color: #ae17db;font-size:25px;"><u>Rules and Regulation fot HS Cargo Service</u></h4>
                   <div class="d-flex mt-2">
-                    <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">I guarantee that I am the owner of the goods that will be transported.</p>
+                    <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp"  style="font-size:21px;">I guarantee that I am the owner of the goods that will be transported.</p>
                   </div>
                   <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp ">I agree as a customer or recipient that HS cargo is not concerned with any illegal or unlawful goods whatsoever.</p>
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp " style="font-size:21px;">I agree as a customer or recipient that HS cargo is not concerned with any illegal or unlawful goods whatsoever.</p>
                   </div>
                   <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">HS Cargo will not be responsible for the consequences of goods that are successfully received and signed by customer.</p>
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp" style="font-size:21px;">HS Cargo will not be responsible for the consequences of goods that are successfully received and signed by customer.</p>
                   </div>
                   <div class="d-flex mt-1">
-                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">If there is any issue on the goods that didn't pay insurance fee, HS cargo will only compansate 10 times of the delivery fee.
+                    <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp" style="font-size:21px;">If there is any issue on the goods that didn't pay insurance fee, HS cargo will only compansate 10 times of the delivery fee.
                         &nbsp;&nbsp;&nbsp;<a class="seemore" style="color:#1e0c24;" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target="#collapseExample" onclick="btnhide()">see more....</a>
                     </p>
                   </div>
@@ -118,10 +124,10 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
                   data-target="#imgModal"><span>See Document</span></button>
                   <div class="collapse" id="collapseExample">
                       <div class="d-flex mt-1">
-                        <i class="bluecolor fas fa-check"></i><p class="ms-2 ppp">Insurance fee is to provide a compensation for the loss or damage of expensive and valueable goods according to the original worth of the goods.Insurance fee is charged 5% of the good's price.</p>
+                        <i class="bluecolor fas fa-check"></i><p class="ms-2 ppp" style="font-size:21px;">Insurance fee is to provide a compensation for the loss or damage of expensive and valueable goods according to the original worth of the goods.Insurance fee is charged 5% of the good's price.</p>
                       </div>
                       <div class="d-flex mt-1">
-                        <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp">I completely agree with the above terms and conditions as a customer or recipient.</p>
+                        <i class="bluecolor fas fa-check"></i><p class="ms-2  ppp" style="font-size:21px;">I completely agree with the above terms and conditions as a customer or recipient.</p>
                       </div>
                       <button class="button design" aria-expanded="false" aria-controls="collapseExample" data-toggle="modal"
                        data-target="#imgModal"><span>See Document</span></button>
@@ -137,11 +143,11 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
                             @foreach ($news as $n)
                             <div class="carousel-item">
                             <div class="row">
-                              <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="public/{{$n->image}}" alt=""/></div>
+                              <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="public/images/{{$n->image}}" alt=""/></div>
                               <div class="col-md-7 col-lg-5 text-center text-md-start">
-                                <h4 class="" style="color: #ae17db"><u>{{$n->title}}</u></h4>
+                                <h4 class="mt-5" style="color: #ae17db;font-size:23px;"><u>{{$n->title}}</u></h4>
                                 <div class="d-flex mt-2">
-                                  <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp">{{$n->description}}</p>
+                                  <i class="bluecolor fas fa-check"></i></i><p class="ms-2  ppp" style="font-size:21px;">{{$n->description}}</p>
                                 </div>
                                
                               </div>
@@ -318,7 +324,7 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
           <div class="col-md-8 col-lg-5">
             <h2>Our Delivery Network</h2>
           </div>
-          <div class="pt-8"><img class="img-fluid" src="{{asset('frontend/assets/img/gallery/map.png')}}" alt="" /></div>
+          <div class="pt-5"><img class="img-fluid" src="{{asset('frontend/assets/img/pp4.jpg')}}" alt="" width="1480"/></div>
         </div>
       </div>
       <!-- end of .container-->

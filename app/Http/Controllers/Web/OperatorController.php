@@ -237,6 +237,7 @@ class OperatorController extends Controller
             // dd($id);
 
         $del = DB::table('role_user')->where('user_id',$id)->delete();
+		// dd($del);
         User::find($id)->delete();
 
         return redirect()->back();

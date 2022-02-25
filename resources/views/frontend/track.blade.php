@@ -212,7 +212,7 @@
                         <h5 style="color:#175cdb">Final Receive Date</h5>
                     </div>
                     <div class="col-md-6">
-                        <input type="date" name="receive_date"  class="border border-primary">
+                          <input type="date" name="receive_date"  class="border border-primary">
                     </div>
                   </div>
                   <hr>
