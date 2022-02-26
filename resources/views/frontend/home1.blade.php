@@ -68,13 +68,13 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
               </div>
             </div>
             <div class="carousel-item">
-                <img class="" src="{{asset('frontend/assets/img/pp1.jpg')}}" alt="Second slide" width="1480" height="600">
+                <img class="" src="{{asset('frontend/assets/img/pp1.jpg')}}" alt="Second slide" width="1480" height="708">
             </div>
             <div class="carousel-item">
-              <img class="" src="{{asset('frontend/assets/img/pp3.jpg')}}" alt="Second slide" width="1480" height="600">
+              <img class="" src="{{asset('frontend/assets/img/pp3.jpg')}}" alt="Second slide" width="1480" height="708">
           </div>
           <div class="carousel-item">
-            <img class="" src="{{asset('frontend/assets/img/pp5.jpg')}}" alt="Second slide" width="1480" height="600">
+            <img class="" src="{{asset('frontend/assets/img/pp5.jpg')}}" alt="Second slide" width="1480" height="708">
         </div>
 
 
@@ -324,7 +324,7 @@ HS cargo လုပ်ငန်း အား ထပ်မံ အကောင်�
           <div class="col-md-8 col-lg-5">
             <h2>Our Delivery Network</h2>
           </div>
-          <div class="pt-5"><img class="img-fluid" src="{{asset('frontend/assets/img/pp4.jpg')}}" alt="" width="1480"/></div>
+          <div class="pt-5"><img class="img-fluid" src="{{asset('frontend/assets/img/now.jpg')}}" alt="" width="1480"/></div>
         </div>
       </div>
       <!-- end of .container-->
