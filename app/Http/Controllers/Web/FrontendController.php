@@ -43,8 +43,9 @@ class FrontendController extends Controller
     public function search_track()
     {
         $details = WayPlanSchedule::all();
+        $contacts = Contact::all();
         // dd($details);
-        return view('frontend.home2');
+        return view('frontend.home2',compact('contacts'));
         // return view('frontend.home2');
     }
 

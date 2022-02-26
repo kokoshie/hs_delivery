@@ -262,9 +262,68 @@ Contact::find($id)->delete();
 return redirect()->back();
 }
 
-    protected function update_employee($id){
+  protected function update_employee(Request $request){
+         dd($request->all());
+}
 
-       dd($id);
+protected function update_news(Request $request){
+	// dd($request->all());
+	
+}
+
+protected function find_news_update(Request $request){
+	// dd($request->old_id);
+	$update = News::find($request->old_id);
+	return response()->json($update);
+}
+
+protected function store_update_news(Request $request){
+	// dd($request->image == null);
+      
+	if($request->hasFile('img'))
+         {
+        $file = $request->file('img');
+        $originalname = $file->getClientOriginalName();
+        $filename =$originalname;
+        $file->move('public/images', $filename);
+          }
+
+	$title = $request->title;
+	$description = $request->des;
+	$update_news = News::find($request->news_id);
+	// dd($update_contact);
+	$update_news->title = $title;
+    if($request->hasFile('img'))
+         {
+	$update_news->image = $filename;
+		 }
+	$update_news->description = $description;
+	$update_news->save();
+	alert()->success('Updated News Successfully!!!');
+	return redirect()->back();
+}
+
+
+protected function find_contact_update(Request $request){
+	// dd($request->old_id);
+	$update = Contact::find($request->old_id);
+	return response()->json($update);
+}
+
+
+protected function store_update_contact(Request $request){
+	// dd($request->location);
+	$location = $request->location;
+	$address = $request->address;
+	$phone = $request->phno;
+	$update_contact = Contact::find($request->contact_id);
+	// dd($update_contact);
+	$update_contact->location = $location;
+	$update_contact->address = $address;
+	$update_contact->phone_number = $phone;
+	$update_contact->save();
+	alert()->success('Updated Contact Successfully!!!');
+	return redirect()->back();
 }
 
 

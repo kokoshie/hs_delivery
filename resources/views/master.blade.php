@@ -288,15 +288,30 @@
                             </ul>
                         </li>
                         @if (session()->get('user')->hasRole('Doctor') || session()->get('user')->hasRole('Manager'))
+
+                        <li class="submenu">
+                            <a href="#"><i class="bluecolor fas fa-user"></i><span>Admin </span> <span class="menu-arrow"></span></a>
+
+                            <ul style="display: none;">
+
                         <li>
-                            <a href="{{route('employee_list')}}"><i class="bluecolor fas fa-users"></i><span>Employee List</span></a>
+
+                            <a href="{{route('employee_list')}}"><i class="bluecolor fas fa-users mr-1"></i><span>Employee List</span><i class="float-right  bluecolor fas fa-angle-right"></i></a>
                         </li>
                         <li>
-                            <a href="{{route('news_list')}}"><i class="bluecolor fas fa-users"></i><span>News List</span></a>
+                            <a href="{{route('news_list')}}">
+ 
+ 
+                                <i class="bluecolor fas fa-newspaper mr-1"></i><span>News List</span><i class="float-right  bluecolor fas fa-angle-right"></i></a>
                         </li>
                         <li>
-                            <a href="{{route('contact_list')}}"><i class="bluecolor fas fa-users"></i><span>Contact List</span></a>
+                            <a href="{{route('contact_list')}}">
+ 
+ 
+                                <i class="bluecolor fas fa-address-card mr-1"></i><span>Contact List</span><i class="float-right  bluecolor fas fa-angle-right"></i></a>
                         </li>
+                    </ul>
+                </li>
                         {{-- <li>
                             <a href="{{route('doctor.onlinebookings')}}"><i class="pinkcolor fas fa-laptop-medical"></i><span>Online Booking</span></a>
                         </li>

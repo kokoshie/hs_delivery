@@ -107,7 +107,12 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::get('delete_employee/{id}', 'Web\OperatorController@delete_employee')->name('delete_employee');
 	Route::get('delete_news/{id}', 'Web\OperatorController@delete_news')->name('delete_news');
 	Route::get('delete_contact/{id}', 'Web\OperatorController@delete_contact')->name('delete_contact');
-    Route::get('update_employee/{id}', 'Web\OperatorController@update_employee')->name('update_employee');
+    Route::post('update_employee', 'Web\OperatorController@update_employee')->name('update_employee');
+	Route::post('store_update_news', 'Web\OperatorController@store_update_news')->name('store_update_news');
+	Route::post('update_contact', 'Web\OperatorController@update_contact')->name('update_contact');
+	Route::post('find_news_update', 'Web\OperatorController@find_news_update')->name('find_news_update');
+	Route::post('find_contact_update', 'Web\OperatorController@find_contact_update')->name('find_contact_update');
+	Route::post('store_update_contact', 'Web\OperatorController@store_update_contact')->name('store_update_contact');
 
     //master data
     Route::get('township', 'Web\OperatorController@township')->name('township');

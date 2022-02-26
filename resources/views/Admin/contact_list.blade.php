@@ -96,10 +96,98 @@
                 <td>{{$c->location}}</td>
                 <td>{{$c->address}}</td>
                 <td>{{$c->phone_number}}</td>
-                <td class="text-center"><a href="{{route('delete_contact',$c->id)}}" class="btn btn-sm btn-danger">Delete</a></td>
+                <td>
+                    <a href="{{route('delete_contact',$c->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateModal" onclick="update_contact('{{$c->id}}')">Update</a>
+                </td>
+
             </tr>
         @endforeach
     </tbody>
 </table>
 
+<div class="modal  fade" id="updateModal" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:rgb(165, 25, 153)">Contact Update Form</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="POST" action="{{route('store_update_contact')}}" enctype='multipart/form-data'>
+                    @csrf
+                    <input type="hidden" value="" id="i" name="contact_id">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                        <label for="" style="color:rgb(34, 190, 241)" class="mt-3">Location</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="location" id="l" style="border-radius: 7px;color:rgb(41, 87, 236);width: 100%;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;" class="border border-outline border-primary">
+                                    <option selected hidden>Choose Location</option>
+                                    @foreach($location as $locat)
+                                        <option value="{{$locat->name}}">{{$locat->name}}</option>
+                                    @endforeach
+                                    <option value="MYAWADY">MYAWADY</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="" style="color:rgb(34, 190, 241)" class="mt-3">Address</label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea name="address" id="a" cols="30" rows="3" class="form-control border border-outline border-primary"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                              <div class="col-md-3">
+                                <label for="" style="color:rgb(34, 190, 241)" class="mt-3">Phone Number</label>
+                              </div>
+                              <div class="col-md-9 mt-2">
+                                <input type="text" id="p" name="phno" class="form-control border border-outline border-primary" placeholder="Enter Phone No,">
+                              </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row offset-3 mt-3">
+                        <button type="submit" class="btn btn-lg btn-primary">Save</button></a>
+                        <button class="btn btn-lg btn-danger ml-3" data-dismiss="modal">Cancel</button>
+                   </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+</div>
+
+@endsection
+
+@section('js')
+<script>
+    function update_contact(val){
+        // alert(val);
+        $.ajax({
+            type:'POST',
+            url:'/find_contact_update',
+            dataType:'json',
+            data:{
+                    "_token": "{{ csrf_token() }}",
+                    "old_id": val,
+                },
+
+            success:function(data){
+                //  alert(data.id);
+                $('#i').val(data.id);
+                $('#l').val(data.location);
+                $('#a').val(data.address);
+                $('#p').val(data.phone_number);
+            }
+    });
+    }
+</script>
 @endsection
